@@ -1,0 +1,148 @@
+$primary: #2c5f7c;
+$primary-dark: #1a3d52;
+$accent: #e8a838;
+
+footer {
+  background: $primary-dark;
+  color: #c8d6de;
+}
+
+.footer-top {
+  padding: 4rem 0 3rem;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+  gap: 3rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.footer-brand {
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+
+    i {
+      font-size: 1.5rem;
+      color: $accent;
+    }
+
+    span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+    }
+  }
+
+  p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #a0b8c8;
+    margin-bottom: 0.75rem;
+  }
+
+  .tax-info {
+    font-size: 0.8rem;
+    color: #7a98ab;
+    margin-bottom: 1.25rem;
+  }
+}
+
+.social-links {
+  display: flex;
+  gap: 0.75rem;
+
+  a {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #3a6e8c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a0b8c8;
+    transition: all 0.3s ease;
+    text-decoration: none;
+
+    &:hover {
+      background: $accent;
+      border-color: $accent;
+      color: #fff;
+    }
+  }
+}
+
+.footer-links,
+.footer-contact {
+  h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 1.25rem;
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+      margin-bottom: 0.65rem;
+    }
+
+    a {
+      font-size: 0.9rem;
+      color: #a0b8c8;
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $accent;
+      }
+    }
+  }
+}
+
+.footer-contact {
+  ul {
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+
+      i {
+        color: $accent;
+        margin-top: 0.15rem;
+        min-width: 16px;
+      }
+    }
+  }
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.25rem 0;
+
+  p {
+    text-align: center;
+    font-size: 0.825rem;
+    color: #7a98ab;
+  }
+}

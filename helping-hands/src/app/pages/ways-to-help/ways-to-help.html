@@ -1,0 +1,89 @@
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="page-hero-content">
+    <span class="hero-label">Get Involved</span>
+    <h1>Ways You Can <span class="script-text">Make a Difference</span></h1>
+    <p>Every act of kindness, no matter how small, helps transform a child's life.</p>
+  </div>
+</section>
+
+<!-- Ways Grid -->
+<section class="ways-section section">
+  <div class="container">
+    <h2 class="section-title">How You Can Help</h2>
+    <p class="section-subtitle">There are many meaningful ways to support children with cleft lip and palate in the Philippines.</p>
+    <div class="ways-grid">
+      @for (way of ways; track way.title) {
+        <div class="way-card">
+          <div class="way-icon"><i [class]="way.icon"></i></div>
+          <h3>{{ way.title }}</h3>
+          <p>{{ way.description }}</p>
+          <a [routerLink]="way.link" class="way-action">{{ way.action }} <i class="fas fa-arrow-right"></i></a>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Impact Section -->
+<section class="impact-section section alt-bg">
+  <div class="container">
+    <div class="impact-grid">
+      <div class="impact-text">
+        <span class="label">Your Impact</span>
+        <h2>What Your Gift Provides</h2>
+        <ul class="impact-list">
+          <li>
+            <div class="impact-amount">$25</div>
+            <div><strong>Transportation</strong><p>Covers round-trip travel for a child and guardian to the surgical facility.</p></div>
+          </li>
+          <li>
+            <div class="impact-amount">$50</div>
+            <div><strong>Nutrition Support</strong><p>Provides nutritional assistance to prepare a malnourished child for surgery.</p></div>
+          </li>
+          <li>
+            <div class="impact-amount">$100</div>
+            <div><strong>Mission Support</strong><p>Covers lodging, meals, and care for a family during a week-long medical mission.</p></div>
+          </li>
+          <li>
+            <div class="impact-amount">$250</div>
+            <div><strong>Full Surgery</strong><p>Funds a complete cleft surgery including all pre- and post-operative care.</p></div>
+          </li>
+        </ul>
+      </div>
+      <div class="impact-image">
+        <div class="image-placeholder">
+          <i class="fas fa-hand-holding-heart"></i>
+          <span>Change a Life</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section section">
+  <div class="container">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-grid">
+      @for (faq of faqs; track faq.question) {
+        <div class="faq-item">
+          <h4><i class="fas fa-question-circle"></i> {{ faq.question }}</h4>
+          <p>{{ faq.answer }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="page-cta">
+  <div class="container">
+    <h2>Ready to Make a Difference?</h2>
+    <p>Your generosity can give a child the gift of a new smile and a brighter future.</p>
+    <div class="cta-buttons">
+      <a routerLink="/sponsorships" class="btn btn-primary">Sponsor a Child</a>
+      <a routerLink="/contact" class="btn btn-secondary">Contact Us</a>
+    </div>
+  </div>
+</section>

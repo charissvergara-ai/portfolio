@@ -1,0 +1,378 @@
+$primary: #2c5f7c;
+$primary-dark: #1a3d52;
+$accent: #e8a838;
+$white: #ffffff;
+$off-white: #f8f6f3;
+
+.page-hero {
+  background: linear-gradient(135deg, $primary-dark 0%, $primary 100%);
+  padding: 8rem 2rem 4rem;
+  text-align: center;
+  color: $white;
+
+  .hero-label {
+    display: inline-block;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: $accent;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: $white;
+    margin-bottom: 1rem;
+
+    .script-text {
+      font-family: 'Dancing Script', cursive;
+      color: $accent;
+    }
+  }
+
+  p {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section {
+  padding: 5rem 0;
+
+  @media (max-width: 768px) {
+    padding: 3rem 0;
+  }
+}
+
+.alt-bg {
+  background: $off-white;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: $primary-dark;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #5a5a5a;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+}
+
+// Upcoming Missions
+.missions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mission-card {
+  background: $white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 4px solid $accent;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .mission-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #4caf50;
+    margin-bottom: 1rem;
+
+    i { font-size: 0.5rem; }
+  }
+
+  .mission-date {
+    font-size: 0.9rem;
+    color: #8a8a8a;
+    margin-bottom: 0.75rem;
+
+    i { color: $accent; margin-right: 0.35rem; }
+  }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    color: $primary-dark;
+    margin-bottom: 1.25rem;
+  }
+
+  .mission-details {
+    margin-bottom: 1.5rem;
+  }
+
+  .mission-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    color: #5a5a5a;
+    margin-bottom: 0.5rem;
+
+    i { color: $primary; min-width: 16px; }
+  }
+
+  .btn-sm {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.875rem;
+  }
+}
+
+// How Missions Work
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.process-card {
+  background: $white;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .process-number {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: $off-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: $primary;
+  }
+
+  .process-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba($primary, 0.1), rgba($accent, 0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+
+    i { font-size: 1.35rem; color: $primary; }
+  }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: $primary-dark;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+}
+
+// Partners
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.partner-card {
+  background: $white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .partner-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba($primary, 0.1), rgba($accent, 0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+
+    i { font-size: 1.5rem; color: $primary; }
+  }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    color: $primary-dark;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .partner-missions {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: $accent;
+
+    i { font-size: 0.8rem; }
+  }
+}
+
+// Past Missions
+.past-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.past-card {
+  background: $white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  .past-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .past-date {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: $primary;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .past-surgeries {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: $white;
+    background: $accent;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+  }
+
+  h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: $primary-dark;
+    margin-bottom: 0.5rem;
+  }
+
+  .past-partner {
+    font-size: 0.85rem;
+    color: #8a8a8a;
+
+    i { color: $primary; margin-right: 0.3rem; font-size: 0.8rem; }
+  }
+}
+
+// CTA
+.page-cta {
+  background: linear-gradient(135deg, $primary-dark 0%, $primary 100%);
+  padding: 5rem 2rem;
+  text-align: center;
+  color: $white;
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: $white;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

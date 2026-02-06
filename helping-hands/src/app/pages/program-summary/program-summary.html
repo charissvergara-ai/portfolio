@@ -1,0 +1,93 @@
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="page-hero-content">
+    <span class="hero-label">Our Program</span>
+    <h1>How We Change Lives</h1>
+    <p>From finding children in remote villages to years of post-surgery support, our comprehensive program ensures no child is left behind.</p>
+  </div>
+</section>
+
+<!-- Impact Stats -->
+<section class="impact-stats">
+  <div class="container">
+    <div class="stats-grid">
+      @for (stat of impacts; track stat.label) {
+        <div class="stat-item">
+          <span class="stat-number">{{ stat.number }}</span>
+          <span class="stat-label">{{ stat.label }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Timeline Section -->
+<section class="timeline-section section">
+  <div class="container">
+    <h2 class="section-title">Our Step-by-Step Process</h2>
+    <p class="section-subtitle">
+      Every child's journey to a new smile follows a careful, compassionate process from start to finish.
+    </p>
+    <div class="timeline">
+      @for (step of steps; track step.title; let i = $index) {
+        <div class="timeline-item" [class.reverse]="i % 2 !== 0">
+          <div class="timeline-marker">
+            <span class="step-number">{{ i + 1 }}</span>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-icon">
+              <i [class]="step.icon"></i>
+            </div>
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.description }}</p>
+            <p class="detail">{{ step.detail }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Summary -->
+<section class="summary-section section alt-bg">
+  <div class="container">
+    <div class="summary-grid">
+      <div class="summary-text">
+        <span class="label">The Helping Hands Difference</span>
+        <h2>End-to-End Support for Every Child</h2>
+        <p>
+          Unlike many organizations that only fund surgery, Helping Hands provides comprehensive
+          support at every stage of a child's journey. We find children who would otherwise never
+          receive help, prepare them physically and emotionally for surgery, cover every expense,
+          and remain in their lives for years afterward.
+        </p>
+        <p>
+          Our team in the Philippines builds lasting relationships with the families we serve.
+          We know every child by name, visit their homes, and celebrate their milestones.
+          This is not just a program &mdash; it's a family.
+        </p>
+        <a routerLink="/family" class="btn btn-outline">
+          Meet Our Family <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+      <div class="summary-image">
+        <div class="image-placeholder">
+          <i class="fas fa-hand-holding-heart"></i>
+          <span>Comprehensive Care</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="page-cta">
+  <div class="container">
+    <h2>Help Fund a Child's Surgery</h2>
+    <p>Your support covers every step of the journey &mdash; from finding a child in need to years of follow-up care after surgery.</p>
+    <div class="cta-buttons">
+      <a routerLink="/sponsorships" class="btn btn-primary">Sponsor a Child</a>
+      <a routerLink="/ways-you-can-help" class="btn btn-secondary">Ways to Help</a>
+    </div>
+  </div>
+</section>

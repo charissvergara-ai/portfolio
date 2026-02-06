@@ -1,0 +1,83 @@
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="page-hero-content">
+    <span class="hero-label">Our Team</span>
+    <h1>The People Behind <span class="script-text">the Mission</span></h1>
+    <p>Meet the dedicated team in the USA and Philippines working together to give children a new smile.</p>
+  </div>
+</section>
+
+<!-- USA Team -->
+<section class="team-section section">
+  <div class="container">
+    <div class="team-header">
+      <i class="fas fa-flag-usa"></i>
+      <h2>United States Team</h2>
+      <p>Our US team manages fundraising, donor relations, partner coordination, and overall strategy.</p>
+    </div>
+    <div class="team-grid">
+      @for (member of usaTeam; track member.name) {
+        <div class="team-card">
+          <div class="member-avatar">
+            <i class="fas fa-user"></i>
+          </div>
+          <h3>{{ member.name }}</h3>
+          <span class="member-role">{{ member.role }}</span>
+          <p>{{ member.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Philippines Team -->
+<section class="team-section section alt-bg">
+  <div class="container">
+    <div class="team-header">
+      <i class="fas fa-flag"></i>
+      <h2>Philippines Team</h2>
+      <p>Our hardworking Philippines team finds children, prepares them for surgery, and provides years of follow-up care.</p>
+    </div>
+    <div class="team-grid">
+      @for (member of phTeam; track member.name) {
+        <div class="team-card">
+          <div class="member-avatar">
+            <i class="fas fa-user"></i>
+          </div>
+          <h3>{{ member.name }}</h3>
+          <span class="member-role">{{ member.role }}</span>
+          <p>{{ member.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Join Us -->
+<section class="join-section section">
+  <div class="container">
+    <div class="join-content">
+      <h2>Want to Join Our Team?</h2>
+      <p>
+        We are always looking for passionate individuals who want to make a difference
+        in the lives of children. Whether you are in the USA or the Philippines,
+        there may be a place for you on our team.
+      </p>
+      <a routerLink="/contact" class="btn btn-outline">
+        Get in Touch <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="page-cta">
+  <div class="container">
+    <h2>Support Our Team's Work</h2>
+    <p>Your donation empowers our team to find, prepare, and care for more children every year.</p>
+    <div class="cta-buttons">
+      <a routerLink="/ways-you-can-help" class="btn btn-primary">Ways to Help</a>
+      <a routerLink="/contact" class="btn btn-secondary">Contact Us</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,128 @@
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="page-hero-content">
+    <span class="hero-label">Sponsorships</span>
+    <h1>Give the Gift of a <span class="script-text">New Smile</span></h1>
+    <p>100% of your sponsorship goes directly to supporting children with cleft lip and palate in the Philippines.</p>
+  </div>
+</section>
+
+<!-- Guarantees -->
+<section class="guarantees-section">
+  <div class="container">
+    <div class="guarantees-grid">
+      @for (guarantee of guarantees; track guarantee.title) {
+        <div class="guarantee-item">
+          <i [class]="guarantee.icon"></i>
+          <div>
+            <h4>{{ guarantee.title }}</h4>
+            <p>{{ guarantee.description }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Sponsorship Tiers -->
+<section class="tiers-section section">
+  <div class="container">
+    <h2 class="section-title">Sponsorship Options</h2>
+    <p class="section-subtitle">
+      Choose the sponsorship that fits your heart and budget. Every gift makes a real difference in a child's life.
+    </p>
+    <div class="tiers-grid">
+      @for (tier of tiers; track tier.name) {
+        <div class="tier-card" [class.highlighted]="tier.highlighted">
+          @if (tier.highlighted) {
+            <div class="tier-badge">Most Popular</div>
+          }
+          <div class="tier-icon">
+            <i [class]="tier.icon"></i>
+          </div>
+          <h3>{{ tier.name }}</h3>
+          <div class="tier-price">
+            <span class="amount">{{ tier.amount }}</span>
+            <span class="frequency">{{ tier.frequency }}</span>
+          </div>
+          <p class="tier-description">{{ tier.description }}</p>
+          <ul class="tier-features">
+            @for (feature of tier.features; track feature) {
+              <li>
+                <i class="fas fa-check"></i>
+                <span>{{ feature }}</span>
+              </li>
+            }
+          </ul>
+          <a routerLink="/contact" class="btn" [class.btn-primary]="tier.highlighted" [class.btn-outline]="!tier.highlighted">
+            Sponsor Now
+          </a>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-sponsor section alt-bg">
+  <div class="container">
+    <h2 class="section-title">How Sponsorship Works</h2>
+    <p class="section-subtitle">
+      Your journey as a sponsor is simple, transparent, and deeply rewarding.
+    </p>
+    <div class="sponsor-steps">
+      <div class="sponsor-step">
+        <div class="step-circle">1</div>
+        <h3>Choose Your Level</h3>
+        <p>Select a sponsorship tier that matches your giving goals, or contact us for a custom amount.</p>
+      </div>
+      <div class="step-connector"></div>
+      <div class="sponsor-step">
+        <div class="step-circle">2</div>
+        <h3>Make Your Gift</h3>
+        <p>Donate securely through our website, by mail, or contact us to arrange your preferred payment method.</p>
+      </div>
+      <div class="step-connector"></div>
+      <div class="sponsor-step">
+        <div class="step-circle">3</div>
+        <h3>Receive Updates</h3>
+        <p>Get photos, stories, and progress reports about the children your generosity has helped.</p>
+      </div>
+      <div class="step-connector"></div>
+      <div class="sponsor-step">
+        <div class="step-circle">4</div>
+        <h3>See the Impact</h3>
+        <p>Watch children's lives transform as they receive surgery and ongoing care thanks to your support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonial -->
+<section class="testimonial-section section">
+  <div class="container">
+    <div class="testimonial-content">
+      <i class="fas fa-quote-left"></i>
+      <blockquote>
+        Knowing that every cent of my donation goes directly to helping a child receive surgery
+        gives me complete confidence in Helping Hands. I've seen the before and after photos
+        of children I've sponsored, and it's the most rewarding experience of my life.
+      </blockquote>
+      <div class="testimonial-author">
+        <span class="author-name">A Grateful Sponsor</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="page-cta">
+  <div class="container">
+    <h2>Ready to Change a Life?</h2>
+    <p>Your sponsorship provides everything a child needs &mdash; from finding them to surgery to years of follow-up care.</p>
+    <div class="cta-buttons">
+      <a routerLink="/contact" class="btn btn-primary">Start Sponsoring</a>
+      <a routerLink="/program-summary" class="btn btn-secondary">Learn Our Process</a>
+    </div>
+  </div>
+</section>

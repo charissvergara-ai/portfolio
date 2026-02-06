@@ -1,0 +1,66 @@
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="page-hero-content">
+    <span class="hero-label">Our Family</span>
+    <h1>The Children We <span class="script-text">Love &amp; Serve</span></h1>
+    <p>Meet some of the amazing children whose lives have been transformed through your generosity.</p>
+  </div>
+</section>
+
+<!-- Intro -->
+<section class="intro-section section">
+  <div class="container">
+    <div class="intro-content">
+      <h2>Before &amp; After: Stories of Hope</h2>
+      <p>
+        Every child in our program has a unique story. From the moment we find them to years after surgery,
+        we walk alongside these families. These are not just patients &mdash; they are our family.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Filter -->
+<section class="gallery-section">
+  <div class="container">
+    <div class="filter-bar">
+      <button [class.active]="activeFilter() === 'all'" (click)="setFilter('all')">All Children</button>
+      <button [class.active]="activeFilter() === 'post-surgery'" (click)="setFilter('post-surgery')">Post-Surgery</button>
+      <button [class.active]="activeFilter() === 'pre-surgery'" (click)="setFilter('pre-surgery')">Awaiting Surgery</button>
+    </div>
+
+    <div class="children-grid">
+      @for (child of filteredChildren(); track child.name) {
+        <div class="child-card" [class.pre-surgery]="child.status === 'pre-surgery'">
+          <div class="child-image">
+            <img [src]="child.image" [alt]="child.name">
+            <span class="child-status" [class.awaiting]="child.status === 'pre-surgery'">
+              {{ child.status === 'post-surgery' ? 'Surgery Complete' : 'Awaiting Surgery' }}
+            </span>
+          </div>
+          <div class="child-info">
+            <h3>{{ child.name }}</h3>
+            <div class="child-meta">
+              <span><i class="fas fa-birthday-cake"></i> Age {{ child.age }}</span>
+              <span><i class="fas fa-map-marker-alt"></i> {{ child.location }}</span>
+              <span><i class="fas fa-calendar"></i> {{ child.year }}</span>
+            </div>
+            <p>{{ child.story }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="page-cta">
+  <div class="container">
+    <h2>Help Us Grow Our Family</h2>
+    <p>Every child we reach is another smile restored. Sponsor a child today and become part of their journey.</p>
+    <div class="cta-buttons">
+      <a routerLink="/sponsorships" class="btn btn-primary">Sponsor a Child</a>
+      <a routerLink="/contact" class="btn btn-secondary">Contact Us</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,140 @@
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="page-hero-content">
+    <span class="hero-label">Medical Missions</span>
+    <h1>Bringing Surgery to <span class="script-text">Those in Need</span></h1>
+    <p>We partner with world-class surgical organizations to bring free cleft lip and palate surgery to children throughout the Philippines.</p>
+  </div>
+</section>
+
+<!-- Upcoming Missions -->
+<section class="upcoming-section section">
+  <div class="container">
+    <h2 class="section-title">Upcoming Missions</h2>
+    <p class="section-subtitle">
+      Our team is already preparing children and families for these upcoming surgical missions.
+    </p>
+    <div class="missions-grid">
+      @for (mission of upcomingMissions; track mission.date) {
+        <div class="mission-card upcoming">
+          <div class="mission-status">
+            <i class="fas fa-circle"></i> {{ mission.status }}
+          </div>
+          <div class="mission-date">
+            <i class="fas fa-calendar-alt"></i> {{ mission.date }}
+          </div>
+          <h3>{{ mission.location }}</h3>
+          <div class="mission-details">
+            <div class="mission-detail">
+              <i class="fas fa-handshake"></i>
+              <span>Partner: {{ mission.partner }}</span>
+            </div>
+            <div class="mission-detail">
+              <i class="fas fa-users"></i>
+              <span>Up to {{ mission.slots }} surgeries</span>
+            </div>
+          </div>
+          <a routerLink="/contact" class="btn btn-outline btn-sm">
+            Get Involved <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- How Missions Work -->
+<section class="how-missions section alt-bg">
+  <div class="container">
+    <h2 class="section-title">How a Mission Works</h2>
+    <p class="section-subtitle">
+      Months of preparation go into every medical mission to ensure each child receives safe, effective care.
+    </p>
+    <div class="process-grid">
+      <div class="process-card">
+        <div class="process-number">1</div>
+        <div class="process-icon"><i class="fas fa-clipboard-list"></i></div>
+        <h3>Planning</h3>
+        <p>We coordinate with our surgical partner to select dates, locations, and the number of patients for each mission.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-number">2</div>
+        <div class="process-icon"><i class="fas fa-search"></i></div>
+        <h3>Patient Preparation</h3>
+        <p>Our Philippines team identifies, screens, and prepares children, ensuring they meet health and weight requirements.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-number">3</div>
+        <div class="process-icon"><i class="fas fa-hospital-alt"></i></div>
+        <h3>Mission Week</h3>
+        <p>Volunteer surgical teams arrive, and over several days, children receive life-changing cleft repair surgery at no cost.</p>
+      </div>
+      <div class="process-card">
+        <div class="process-number">4</div>
+        <div class="process-icon"><i class="fas fa-heart"></i></div>
+        <h3>Follow-Up</h3>
+        <p>After the mission, our team monitors each child's recovery, providing medicine and follow-up visits for years to come.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Partners -->
+<section class="partners-section section">
+  <div class="container">
+    <h2 class="section-title">Our Surgical Partners</h2>
+    <p class="section-subtitle">
+      We work alongside leading organizations that provide free cleft surgery worldwide.
+    </p>
+    <div class="partners-grid">
+      @for (partner of partners; track partner.name) {
+        <div class="partner-card">
+          <div class="partner-icon">
+            <i [class]="partner.icon"></i>
+          </div>
+          <h3>{{ partner.name }}</h3>
+          <p>{{ partner.description }}</p>
+          <span class="partner-missions">
+            <i class="fas fa-check-circle"></i> {{ partner.missions }}
+          </span>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Past Missions -->
+<section class="past-section section alt-bg">
+  <div class="container">
+    <h2 class="section-title">Past Missions</h2>
+    <p class="section-subtitle">
+      A look back at recent missions and the lives changed through surgery.
+    </p>
+    <div class="past-grid">
+      @for (mission of pastMissions; track mission.date) {
+        <div class="past-card">
+          <div class="past-header">
+            <span class="past-date">{{ mission.date }}</span>
+            <span class="past-surgeries">{{ mission.surgeries }} surgeries</span>
+          </div>
+          <h4>{{ mission.location }}</h4>
+          <p class="past-partner">
+            <i class="fas fa-handshake"></i> {{ mission.partner }}
+          </p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="page-cta">
+  <div class="container">
+    <h2>Support Our Next Mission</h2>
+    <p>Your generosity helps us prepare children, cover their travel and lodging, and fund their life-changing surgery.</p>
+    <div class="cta-buttons">
+      <a routerLink="/sponsorships" class="btn btn-primary">Sponsor a Child</a>
+      <a routerLink="/contact" class="btn btn-secondary">Contact Us</a>
+    </div>
+  </div>
+</section>

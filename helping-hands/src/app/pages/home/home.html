@@ -1,0 +1,138 @@
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-tagline">Bridging the Gap for Filipino Children</span>
+    <h1>Every Child Deserves<br><span class="script-text">a Beautiful Smile</span></h1>
+    <p>We provide free cleft lip and palate surgery for impoverished children in the Philippines, giving them a chance at a brighter future.</p>
+    <div class="hero-buttons">
+      <a routerLink="/ways-you-can-help" class="btn btn-primary">
+        <i class="fas fa-hand-holding-heart"></i> Donate Now
+      </a>
+      <a routerLink="/mission" class="btn btn-secondary">
+        Learn Our Story <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll-indicator">
+    <i class="fas fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      @for (stat of stats; track stat.label) {
+        <div class="stat-item">
+          <span class="stat-number">{{ stat.number }}</span>
+          <span class="stat-label">{{ stat.label }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Mission Preview -->
+<section class="mission-preview section">
+  <div class="container">
+    <div class="mission-grid">
+      <div class="mission-image">
+        <div class="image-placeholder">
+          <i class="fas fa-heart"></i>
+          <span>Healing Smiles</span>
+        </div>
+      </div>
+      <div class="mission-text">
+        <span class="section-label">Our Mission</span>
+        <h2>Filling the Gap for Children with Cleft</h2>
+        <p>
+          In 2011, our founder was moved by a poor Filipino woman holding a baby boy with a cleft lip
+          whose family couldn't afford the surgery he needed. That moment sparked a mission to ensure
+          no child should be denied a normal life because of poverty.
+        </p>
+        <p>
+          Helping Hands bridges the gap so that impoverished Filipino children can receive
+          cleft lip and palate surgery completely free of charge. We handle everything &mdash;
+          finding children, pre-screening, nutrition, transportation, lodging, and years of follow-up care.
+        </p>
+        <a routerLink="/mission" class="btn btn-outline">
+          Read Our Full Story <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How We Help -->
+<section class="how-we-help section">
+  <div class="container">
+    <h2 class="section-title">How We Help</h2>
+    <p class="section-subtitle">
+      From finding children in remote areas to years of post-surgery support, we provide comprehensive care at every step.
+    </p>
+    <div class="services-grid">
+      @for (service of services; track service.title; let i = $index) {
+        <div class="service-card">
+          <div class="service-step">{{ i + 1 }}</div>
+          <div class="service-icon">
+            <i [class]="service.icon"></i>
+          </div>
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Video Section -->
+<section class="video-section section">
+  <div class="container">
+    <div class="video-content">
+      <h2>See the Impact of Your Support</h2>
+      <p>Watch how your generosity transforms the lives of children and their families in the Philippines.</p>
+      <div class="video-wrapper">
+        <div class="video-placeholder">
+          <i class="fas fa-play-circle"></i>
+          <span>Watch Our Story</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Partners Section -->
+<section class="partners-section section">
+  <div class="container">
+    <h2 class="section-title">Our Partners</h2>
+    <p class="section-subtitle">
+      We work alongside leading organizations that provide free cleft surgery worldwide.
+    </p>
+    <div class="partners-grid">
+      @for (partner of partners; track partner) {
+        <div class="partner-card">
+          <i class="fas fa-handshake"></i>
+          <span>{{ partner }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-content">
+      <h2>Help Transform a Child's Life Today</h2>
+      <p>
+        100% of sponsorship funds are used to directly support beneficiaries in the Philippines.
+        Your donation covers surgery, medical care, nutrition, and follow-up support.
+      </p>
+      <div class="cta-buttons">
+        <a routerLink="/sponsorships" class="btn btn-primary">Sponsor a Child</a>
+        <a routerLink="/contact" class="btn btn-secondary">Get In Touch</a>
+      </div>
+    </div>
+  </div>
+</section>

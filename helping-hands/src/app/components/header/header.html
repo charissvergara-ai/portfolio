@@ -1,0 +1,98 @@
+<header [class.scrolled]="scrolled()">
+  <div class="header-container">
+    <a routerLink="/" class="logo" (click)="closeMobileMenu()">
+      <i class="fas fa-heart logo-icon"></i>
+      <div class="logo-text">
+        <span class="logo-main">Helping Hands</span>
+        <span class="logo-sub">Cleft Lip & Palate Charity</span>
+      </div>
+    </a>
+
+    <nav class="desktop-nav">
+      <ul class="nav-list">
+        <li>
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        </li>
+        <li class="dropdown">
+          <button class="dropdown-trigger" (click)="toggleAboutDropdown()">
+            About Us <i class="fas fa-chevron-down"></i>
+          </button>
+          @if (aboutDropdownOpen()) {
+            <ul class="dropdown-menu">
+              <li><a routerLink="/mission" (click)="aboutDropdownOpen.set(false)">Our Mission</a></li>
+              <li><a routerLink="/our-team" (click)="aboutDropdownOpen.set(false)">Our Team</a></li>
+              <li><a routerLink="/program-summary" (click)="aboutDropdownOpen.set(false)">Program Summary</a></li>
+            </ul>
+          }
+        </li>
+        <li>
+          <a routerLink="/medical-missions" routerLinkActive="active">Medical Missions</a>
+        </li>
+        <li class="dropdown">
+          <button class="dropdown-trigger" (click)="toggleGetInvolvedDropdown()">
+            Get Involved <i class="fas fa-chevron-down"></i>
+          </button>
+          @if (getInvolvedDropdownOpen()) {
+            <ul class="dropdown-menu">
+              <li><a routerLink="/sponsorships" (click)="getInvolvedDropdownOpen.set(false)">Sponsorships</a></li>
+              <li><a routerLink="/ways-you-can-help" (click)="getInvolvedDropdownOpen.set(false)">Ways You Can Help</a></li>
+            </ul>
+          }
+        </li>
+        <li>
+          <a routerLink="/family" routerLinkActive="active">Our Family</a>
+        </li>
+        <li>
+          <a routerLink="/contact" routerLinkActive="active">Contact</a>
+        </li>
+      </ul>
+    </nav>
+
+    <a routerLink="/ways-you-can-help" class="donate-btn desktop-only">
+      <i class="fas fa-hand-holding-heart"></i> Donate
+    </a>
+
+    <button class="mobile-menu-btn" (click)="toggleMobileMenu()" [attr.aria-label]="'Toggle menu'">
+      <i [class]="mobileMenuOpen() ? 'fas fa-times' : 'fas fa-bars'"></i>
+    </button>
+  </div>
+
+  @if (mobileMenuOpen()) {
+    <nav class="mobile-nav">
+      <ul class="mobile-nav-list">
+        <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMobileMenu()">Home</a></li>
+        <li>
+          <button class="mobile-dropdown-trigger" (click)="toggleAboutDropdown()">
+            About Us <i [class]="aboutDropdownOpen() ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
+          </button>
+          @if (aboutDropdownOpen()) {
+            <ul class="mobile-submenu">
+              <li><a routerLink="/mission" (click)="closeMobileMenu()">Our Mission</a></li>
+              <li><a routerLink="/our-team" (click)="closeMobileMenu()">Our Team</a></li>
+              <li><a routerLink="/program-summary" (click)="closeMobileMenu()">Program Summary</a></li>
+            </ul>
+          }
+        </li>
+        <li><a routerLink="/medical-missions" routerLinkActive="active" (click)="closeMobileMenu()">Medical Missions</a></li>
+        <li>
+          <button class="mobile-dropdown-trigger" (click)="toggleGetInvolvedDropdown()">
+            Get Involved <i [class]="getInvolvedDropdownOpen() ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
+          </button>
+          @if (getInvolvedDropdownOpen()) {
+            <ul class="mobile-submenu">
+              <li><a routerLink="/sponsorships" (click)="closeMobileMenu()">Sponsorships</a></li>
+              <li><a routerLink="/ways-you-can-help" (click)="closeMobileMenu()">Ways You Can Help</a></li>
+            </ul>
+          }
+        </li>
+        <li><a routerLink="/family" routerLinkActive="active" (click)="closeMobileMenu()">Our Family</a></li>
+        <li><a routerLink="/contact" routerLinkActive="active" (click)="closeMobileMenu()">Contact</a></li>
+        <li class="mobile-donate">
+          <a routerLink="/ways-you-can-help" class="donate-btn" (click)="closeMobileMenu()">
+            <i class="fas fa-hand-holding-heart"></i> Donate Now
+          </a>
+        </li>
+      </ul>
+    </nav>
+  }
+</header>
