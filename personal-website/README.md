@@ -62,6 +62,12 @@ See `package.json` for exact dependency versions and available npm scripts.
 
 If you want, I can also add a short deployment section (Netlify, Vercel, or GitHub Pages) or update the README with screenshots and a demo link. Tell me which you'd prefer.
 
+
+## Video Demo
+
+- Watch the demo: [YouTube](https://youtu.be/d2TI6pn48Ng)
+  
+
 ## Screenshot
 
 <img src="./docs/screenshot1.png" width="600">

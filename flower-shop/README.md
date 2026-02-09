@@ -35,6 +35,11 @@ npm run dev    # Start dev server
 npm run build  # Build for production
 ```
 
+## Video Demo
+
+- Watch the demo: [YouTube](https://youtu.be/OcnUiuv75rM)
+  
+
 ## Screenshots
 
 #### Home Page

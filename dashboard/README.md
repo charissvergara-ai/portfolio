@@ -1,4 +1,4 @@
-# Portfolio Dashboard
+# Dashboard
 
 A modern, feature-rich web dashboard application built with React. This project demonstrates a comprehensive administrative interface for business operations, showcasing professional frontend development practices.
 
@@ -126,7 +126,7 @@ MIT
 
 ## Video Demo
 
-- Watch the demo: [Open local video](./docs/video.mov)
+- Watch the demo: [YouTube](https://youtu.be/fL-ebBTUIF8)
 
 ## Screenshots
 

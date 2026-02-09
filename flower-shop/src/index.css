@@ -36,6 +36,10 @@ body {
   color: #ffd700 !important;
 }
 
+.navbar-custom .nav-link.active {
+  color: #ffd700 !important;
+}
+
 .hero-section {
   background: var(--gradient-hero);
   min-height: 80vh;

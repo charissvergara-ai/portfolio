@@ -19,9 +19,9 @@
           </button>
           @if (aboutDropdownOpen()) {
             <ul class="dropdown-menu">
-              <li><a routerLink="/mission" (click)="aboutDropdownOpen.set(false)">Our Mission</a></li>
-              <li><a routerLink="/our-team" (click)="aboutDropdownOpen.set(false)">Our Team</a></li>
-              <li><a routerLink="/program-summary" (click)="aboutDropdownOpen.set(false)">Program Summary</a></li>
+              <li><a routerLink="/mission" routerLinkActive="active" (click)="aboutDropdownOpen.set(false)">Our Mission</a></li>
+              <li><a routerLink="/our-team" routerLinkActive="active" (click)="aboutDropdownOpen.set(false)">Our Team</a></li>
+              <li><a routerLink="/program-summary" routerLinkActive="active" (click)="aboutDropdownOpen.set(false)">Program Summary</a></li>
             </ul>
           }
         </li>
@@ -34,8 +34,8 @@
           </button>
           @if (getInvolvedDropdownOpen()) {
             <ul class="dropdown-menu">
-              <li><a routerLink="/sponsorships" (click)="getInvolvedDropdownOpen.set(false)">Sponsorships</a></li>
-              <li><a routerLink="/ways-you-can-help" (click)="getInvolvedDropdownOpen.set(false)">Ways You Can Help</a></li>
+              <li><a routerLink="/sponsorships" routerLinkActive="active" (click)="getInvolvedDropdownOpen.set(false)">Sponsorships</a></li>
+              <li><a routerLink="/ways-you-can-help" routerLinkActive="active" (click)="getInvolvedDropdownOpen.set(false)">Ways You Can Help</a></li>
             </ul>
           }
         </li>
@@ -67,9 +67,9 @@
           </button>
           @if (aboutDropdownOpen()) {
             <ul class="mobile-submenu">
-              <li><a routerLink="/mission" (click)="closeMobileMenu()">Our Mission</a></li>
-              <li><a routerLink="/our-team" (click)="closeMobileMenu()">Our Team</a></li>
-              <li><a routerLink="/program-summary" (click)="closeMobileMenu()">Program Summary</a></li>
+              <li><a routerLink="/mission" routerLinkActive="active" (click)="closeMobileMenu()">Our Mission</a></li>
+              <li><a routerLink="/our-team" routerLinkActive="active" (click)="closeMobileMenu()">Our Team</a></li>
+              <li><a routerLink="/program-summary" routerLinkActive="active" (click)="closeMobileMenu()">Program Summary</a></li>
             </ul>
           }
         </li>
@@ -80,8 +80,8 @@
           </button>
           @if (getInvolvedDropdownOpen()) {
             <ul class="mobile-submenu">
-              <li><a routerLink="/sponsorships" (click)="closeMobileMenu()">Sponsorships</a></li>
-              <li><a routerLink="/ways-you-can-help" (click)="closeMobileMenu()">Ways You Can Help</a></li>
+              <li><a routerLink="/sponsorships" routerLinkActive="active" (click)="closeMobileMenu()">Sponsorships</a></li>
+              <li><a routerLink="/ways-you-can-help" routerLinkActive="active" (click)="closeMobileMenu()">Ways You Can Help</a></li>
             </ul>
           }
         </li>

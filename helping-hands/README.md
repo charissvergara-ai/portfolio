@@ -113,6 +113,11 @@ ng build
 Build artifacts are output to the `dist/` directory.
 
 
+## Video Demo
+
+- Watch the demo: [YouTube](https://youtu.be/VyG3eNxLvXY)
+
+
 ### Screenshots
 
 #### Home

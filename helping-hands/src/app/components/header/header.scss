@@ -84,9 +84,13 @@ header {
     transition: color 0.3s ease;
     border-radius: 4px;
 
-    &:hover,
+    &:hover {
+      color: $primary;
+    }
+
     &.active {
       color: $primary;
+      font-weight: 600;
     }
   }
 }
@@ -132,6 +136,12 @@ header {
     &:hover {
       background: #f8f6f3;
       color: $primary;
+    }
+
+    &.active {
+      background: #f0f0f0;
+      color: $primary;
+      font-weight: 600;
     }
   }
 }

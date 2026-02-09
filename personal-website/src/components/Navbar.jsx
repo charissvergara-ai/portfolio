@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   const navLinks = [
     { name: 'Home', href: '#home' },
@@ -11,8 +12,28 @@ const Navbar = () => {
     { name: 'Contact', href: '#contact' },
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['home', 'about', 'projects', 'skills', 'contact'];
+      
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom > 100) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm shadow-sm z-50">
+    <nav className="fixed top-0 left-0 right-0 bg-gray-100 shadow-sm z-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <a href="#home" className="text-2xl font-bold text-primary-600">
@@ -25,7 +46,11 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-secondary-700 hover:text-primary-600 transition-colors duration-200 font-medium"
+                className={`transition-colors duration-200 font-medium ${
+                  activeSection === link.href.slice(1)
+                    ? 'text-primary-600'
+                    : 'text-secondary-700 hover:text-primary-600'
+                }`}
               >
                 {link.name}
               </a>
@@ -69,7 +94,11 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="block py-2 text-secondary-700 hover:text-primary-600 transition-colors duration-200"
+                className={`block py-2 transition-colors duration-200 ${
+                  activeSection === link.href.slice(1)
+                    ? 'text-primary-600 font-medium'
+                    : 'text-secondary-700 hover:text-primary-600'
+                }`}
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}
