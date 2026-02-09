@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ShoppingCart, Menu, X, User, LogOut, Shield, ChevronDown } from "lucide-react";
+import { ShoppingCart, Menu, X, User, LogOut, Shield, Package, ChevronDown } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
@@ -93,6 +93,15 @@ export default function Header() {
                             <Shield className="h-4 w-4" /> Admin Panel
                           </Link>
                         )}
+                        {user.role === "VENDOR" && (
+                          <Link
+                            href="/vendor"
+                            onClick={() => setDropdownOpen(false)}
+                            className="flex items-center gap-2 px-4 py-2.5 text-sm text-text-dark transition-colors hover:bg-light-bg"
+                          >
+                            <Package className="h-4 w-4" /> Vendor Panel
+                          </Link>
+                        )}
                         <button
                           onClick={() => { setDropdownOpen(false); signOut(); }}
                           className="flex w-full items-center gap-2 px-4 py-2.5 text-sm text-red-600 transition-colors hover:bg-red-50"
@@ -162,6 +171,15 @@ export default function Header() {
                       className="block py-3 text-sm font-bold uppercase tracking-wide text-primary transition-colors hover:text-primary-dark"
                     >
                       Admin Panel
+                    </Link>
+                  )}
+                  {user.role === "VENDOR" && (
+                    <Link
+                      href="/vendor"
+                      onClick={() => setMobileOpen(false)}
+                      className="block py-3 text-sm font-bold uppercase tracking-wide text-primary transition-colors hover:text-primary-dark"
+                    >
+                      Vendor Panel
                     </Link>
                   )}
                   <button

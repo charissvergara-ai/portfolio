@@ -28,6 +28,7 @@ export default async function AdminProductsPage() {
                 <th className="px-6 py-3 font-bold text-gray-600">Downloads</th>
                 <th className="px-6 py-3 font-bold text-gray-600">Rating</th>
                 <th className="px-6 py-3 font-bold text-gray-600">Vendor</th>
+                <th className="px-6 py-3 font-bold text-gray-600">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -65,6 +66,13 @@ export default async function AdminProductsPage() {
                   <td className="px-6 py-4 text-gray-500">{product.downloads}</td>
                   <td className="px-6 py-4 text-gray-500">{product.rating.toFixed(1)}</td>
                   <td className="px-6 py-4 text-gray-500">{product.vendor.name}</td>
+                  <td className="px-6 py-4">
+                    {product.deletedAt ? (
+                      <span className="rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-bold text-red-600">Deleted</span>
+                    ) : (
+                      <span className="rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-bold text-green-700">Active</span>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>
