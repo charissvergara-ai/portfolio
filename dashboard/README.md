@@ -112,16 +112,6 @@ npm run lint
 
 ## Pages Overview
 
-## Video Demo
-
-- Watch a short walkthrough of the dashboard features and flows:
-
-<video width="800" controls>
-  <source src="./docs/video.mov" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
-
 | Page | Route | Description |
 |------|-------|-------------|
 | Dashboard | `/` | Overview with stats, charts, and recent orders |
@@ -134,6 +124,9 @@ npm run lint
 
 MIT
 
+## Video Demo
+
+- Watch the demo: [Open local video](./docs/video.mov)
 
 ## Screenshots
 
