@@ -11,14 +11,24 @@ KaGuro Ph is a digital marketplace where Filipino teachers can share, sell, and 
 - **Homepage** — Hero banner, "How It Works" steps, featured products grid, stats, testimonial, and CTAs
 - **Store** — Product grid with category sidebar filtering, search, sorting, and pagination
 - **Product Detail** — Full product view with image, rating, vendor info, add to cart, and related products
-- **Shopping Cart** — Slide-out cart drawer and full cart page with quantity controls and order summary
+- **Shopping Cart** — Slide-out cart drawer and full cart page with quantity controls, order summary, and checkout
 - **FAQs** — Accordion sections for General, Customers, Vendors, and Affiliate Marketers
 - **Contact** — Contact form with phone, email, and social links
 - **Copyright** — Intellectual property policy page
 - **Authentication** — Sign in and sign up with JWT sessions, password visibility toggle
+- **Vendor Dashboard** — Protected vendor panel with sidebar navigation
+  - Dashboard stats (active products, total downloads, est. revenue)
+  - Product management (add, edit, soft delete, restore)
+  - Vendors can only manage their own products
+  - Account settings with profile and password update
+- **Customer Dashboard** — Protected customer area with sidebar navigation
+  - Dashboard stats (total orders, products purchased, total spent)
+  - My Purchases with order history, status badges, and re-download links
+  - Checkout flow that converts cart items into orders
+  - Account settings with profile and password update
 - **Admin Dashboard** — Protected admin panel with sidebar navigation
   - Dashboard stats (users, products, orders, revenue)
-  - Users, Products, Vendors, Testimonials management
+  - Users, Products (with active/deleted status), Vendors, Testimonials management
   - Account settings with profile and password update
 
 ## Technologies
@@ -45,40 +55,50 @@ KaGuro Ph is a digital marketplace where Filipino teachers can share, sell, and 
 ```
 src/
 ├── app/
-│   ├── layout.tsx                    # Root layout (Lato font, Header, Footer, CartProvider)
-│   ├── page.tsx                      # Homepage (featured products, testimonials, search form)
+│   ├── layout.tsx                    # Root layout (Lato font, AuthProvider, CartProvider)
+│   ├── page.tsx                      # Homepage (featured products, testimonials, search)
 │   ├── loading.tsx                   # Loading skeleton UI
 │   ├── globals.css                   # Tailwind 4.0 with @theme custom tokens
-│   ├── api/                          # API routes (auth, cart, etc.)
+│   ├── api/auth/                     # Auth API routes (signin, signup, signout, me)
 │   ├── store/
-│   │   ├── page.tsx                  # Store listing with StoreContent component
-│   │   └── [slug]/
-│   │       └── page.tsx              # Product detail (server component)
-│   ├── cart/
-│   │   └── page.tsx                  # Cart page (client component)
-│   ├── vendor/
-│   │   └── page.tsx                  # Vendor dashboard
-│   ├── faqs/
-│   │   └── page.tsx                  # FAQs with accordion
-│   ├── contact/
-│   │   └── page.tsx                  # Contact form
-│   ├── copyright/
-│   │   └── page.tsx                  # Legal/copyright info
-│   ├── sign-in/
-│   │   └── page.tsx                  # Authentication UI
-│   ├── sign-up/
-│   │   └── page.tsx                  # Registration UI
-│   └── admin/
-│       ├── layout.tsx                # Admin layout with sidebar
-│       ├── page.tsx                  # Admin dashboard
-│       ├── AdminSidebar.tsx          # Navigation sidebar
+│   │   ├── page.tsx                  # Store listing with filters, search, pagination
+│   │   └── [slug]/page.tsx           # Product detail (server component)
+│   ├── cart/page.tsx                 # Cart page (client component)
+│   ├── faqs/page.tsx                 # FAQs with accordion
+│   ├── contact/page.tsx              # Contact form
+│   ├── copyright/page.tsx            # Legal/copyright info
+│   ├── sign-in/page.tsx              # Authentication UI
+│   ├── sign-up/page.tsx              # Registration UI
+│   ├── customer/                     # Customer area (CUSTOMER role only)
+│   │   ├── layout.tsx                # Customer layout with role guard
+│   │   ├── CustomerSidebar.tsx       # Customer navigation sidebar
+│   │   ├── page.tsx                  # Customer dashboard (stats)
+│   │   ├── orders/
+│   │   │   ├── page.tsx              # My Purchases list
+│   │   │   ├── actions.ts            # Server actions (checkout, orders)
+│   │   │   └── OrderList.tsx         # Order cards with download links
+│   │   └── settings/                 # Profile & password update
+│   ├── vendor/                       # Vendor panel (VENDOR role only)
+│   │   ├── layout.tsx                # Vendor layout with role guard
+│   │   ├── VendorSidebar.tsx         # Vendor navigation sidebar
+│   │   ├── page.tsx                  # Vendor dashboard (stats)
+│   │   ├── products/
+│   │   │   ├── page.tsx              # My Products list
+│   │   │   ├── actions.ts            # Server actions (CRUD + soft delete)
+│   │   │   ├── VendorProductList.tsx  # Product table with add form
+│   │   │   └── [id]/edit/            # Edit product (page + form)
+│   │   └── settings/                 # Profile & password update
+│   └── admin/                        # Admin panel (ADMIN role only)
+│       ├── layout.tsx                # Admin layout with role guard
+│       ├── AdminSidebar.tsx          # Admin navigation sidebar
+│       ├── page.tsx                  # Admin dashboard (stats)
 │       ├── users/page.tsx            # User management
-│       ├── products/page.tsx         # Product management
+│       ├── products/page.tsx         # Product management (with status)
 │       ├── vendors/page.tsx          # Vendor management
-│       ├── testimonials/page.tsx     # Testimonial management
-│       └── settings/page.tsx         # Admin settings
+│       ├── testimonials/             # Testimonial CRUD (page + actions)
+│       └── settings/                 # Profile & password update
 ├── components/
-│   ├── Header.tsx                    # Sticky nav, mobile menu, cart badge, active indicators
+│   ├── Header.tsx                    # Sticky nav, mobile menu, cart badge, role-based links
 │   ├── Footer.tsx                    # 4-column footer
 │   ├── ProductCard.tsx               # Product card with add to cart
 │   ├── CartDrawer.tsx                # Slide-out cart drawer
@@ -88,13 +108,11 @@ src/
 │   └── StoreContent.tsx              # Store page with filters & search
 ├── context/
 │   ├── CartContext.tsx               # Cart state management (React Context)
-│   └── AuthContext.tsx               # Authentication state (if applicable)
+│   └── AuthContext.tsx               # Auth state + role-based redirects
 ├── lib/
-│   └── prisma.ts                     # Prisma client singleton (pg adapter)
-├── generated/
-│   └── prisma/                       # Prisma generated types
-└── vendor/                           # Vendor-specific components
-    └── page.tsx
+│   ├── prisma.ts                     # Prisma client singleton (pg adapter)
+│   └── auth.ts                       # JWT helpers (sign, verify, session cookies)
+└── generated/prisma/                 # Prisma generated client & types
 ```
 
 ### Design Tokens (Tailwind @theme)
@@ -130,26 +148,34 @@ src/
 
 ```
 Layout.tsx (Root)
-  ├── Header (Navigation with active indicators)
-  ├── CartProvider (Context wrapper)
-  │   └── Page Routes
-  │       ├── / → Homepage (featured, testimonials, search)
-  │       ├── /store → Product listing & filtering
-  │       ├── /store/[slug] → Product detail
-  │       ├── /cart → Shopping cart
-  │       ├── /vendor → Vendor dashboard
-  │       ├── /faqs → FAQs accordion
-  │       ├── /contact → Contact form
-  │       ├── /copyright → IP policy
-  │       ├── /sign-in → Login
-  │       ├── /sign-up → Registration
-  │       └── /admin (Protected)
-  │           ├── /admin → Dashboard stats
-  │           ├── /admin/users → User management
-  │           ├── /admin/products → Product management
-  │           ├── /admin/vendors → Vendor management
-  │           ├── /admin/testimonials → Testimonial management
-  │           └── /admin/settings → Admin settings
+  ├── AuthProvider + CartProvider (Context wrappers)
+  ├── Header (Navigation with role-based links)
+  ├── Page Routes
+  │   ├── / → Homepage (featured, testimonials, search)
+  │   ├── /store → Product listing & filtering
+  │   ├── /store/[slug] → Product detail
+  │   ├── /cart → Shopping cart + checkout
+  │   ├── /faqs → FAQs accordion
+  │   ├── /contact → Contact form
+  │   ├── /copyright → IP policy
+  │   ├── /sign-in → Login (ADMIN→/admin, VENDOR→/vendor, CUSTOMER→/customer)
+  │   ├── /sign-up → Registration
+  │   ├── /customer (Protected: CUSTOMER role)
+  │   │   ├── /customer → Dashboard stats
+  │   │   ├── /customer/orders → My Purchases (order history, downloads)
+  │   │   └── /customer/settings → Profile & password
+  │   ├── /vendor (Protected: VENDOR role)
+  │   │   ├── /vendor → Dashboard stats
+  │   │   ├── /vendor/products → My Products (add, edit, delete, restore)
+  │   │   ├── /vendor/products/[id]/edit → Edit product
+  │   │   └── /vendor/settings → Profile & password
+  │   └── /admin (Protected: ADMIN role)
+  │       ├── /admin → Dashboard stats
+  │       ├── /admin/users → User management
+  │       ├── /admin/products → Product management (with status)
+  │       ├── /admin/vendors → Vendor management
+  │       ├── /admin/testimonials → Testimonial CRUD
+  │       └── /admin/settings → Admin settings
   └── Footer (Contact & links)
 ```
 
@@ -157,7 +183,7 @@ Layout.tsx (Root)
 
 - **User** — id, name, email, password, role (CUSTOMER/VENDOR/ADMIN)
 - **Category** — id, name, slug
-- **Product** — id, title, slug, description, price, image, rating, downloads, categoryId, vendorId
+- **Product** — id, title, slug, description, price, salePrice, image, rating, downloads, categoryId, vendorId, deletedAt (soft delete)
 - **Order** — id, userId, total, status (PENDING/COMPLETED/CANCELLED)
 - **OrderItem** — id, orderId, productId, price
 - **Testimonial** — id, quote, author, role, active, createdAt
@@ -173,7 +199,7 @@ After seeding the database, you can sign in with these credentials:
 | Vendor | `jose@kaguro.ph` | `password123` |
 | Customer | `juan@kaguro.ph` | `password123` |
 
-> Admin users have access to the admin dashboard at `/admin`.
+> Admin users have access to the admin dashboard at `/admin`. Vendor users have access to the vendor panel at `/vendor`. Customer users have access to their account area at `/customer`.
 
 ## Getting Started
 
@@ -197,7 +223,7 @@ npx prisma dev
 # In a separate terminal, run migrations
 npx prisma migrate dev
 
-# Seed with dummy data (16 products, 6 categories, 4 users, 4 testimonials)
+# Seed with dummy data (16 products, 6 categories, 4 users, 4 testimonials, 3 orders)
 npm run seed
 ```
 
@@ -219,10 +245,10 @@ npm start
 
 ## Video Demo
 
-- Watch the demo: 
-[Kaguro - Main Page](https://youtu.be/wJ3UH23ombE)
-[Kaguro - Vendor](https://youtu.be/BMNakytP97Y)
-[Kaguro - Admin](https://youtu.be/snubukxxV7o)
+- Watch Main Page: [Link](https://youtu.be/wJ3UH23ombE)
+- Watch Vendor Page: [Link](https://youtu.be/BMNakytP97Y)
+- Watch Admin Page: [Link](https://youtu.be/snubukxxV7o)
+- Watch Customer Page: [Link](https://youtu.be/ykPjUVHUKE0)
 
 
 ### Screenshots
@@ -274,3 +300,12 @@ npm start
 
 #### Admin Panel - Settings
 <img src="./docs/screenshot16.png" width="600">
+
+#### Customer Panel - Dashboard
+<img src="./docs/screenshot17.png" width="600">
+
+#### Customer Panel - My Purchase
+<img src="./docs/screenshot18.png" width="600">
+
+#### Customer Panel - Settings
+<img src="./docs/screenshot19.png" width="600">

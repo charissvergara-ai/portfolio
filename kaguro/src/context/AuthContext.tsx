@@ -48,7 +48,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           ? "/admin"
           : data.user.role === "VENDOR"
             ? "/vendor"
-            : "/"
+            : data.user.role === "CUSTOMER"
+              ? "/customer"
+              : "/"
       );
       return null;
     },
@@ -65,7 +67,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const data = await res.json();
       if (!res.ok) return data.error;
       setUser(data.user);
-      router.push(data.user.role === "VENDOR" ? "/vendor" : "/");
+      router.push(
+        data.user.role === "VENDOR"
+          ? "/vendor"
+          : data.user.role === "CUSTOMER"
+            ? "/customer"
+            : "/"
+      );
       return null;
     },
     [router]

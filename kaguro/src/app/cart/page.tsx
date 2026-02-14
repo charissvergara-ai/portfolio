@@ -1,12 +1,39 @@
 "use client";
 
 import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
+import { Minus, Plus, Trash2, ShoppingBag, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { createOrder } from "@/app/customer/orders/actions";
 
 export default function CartPage() {
   const { items, removeItem, updateQuantity, totalPrice, clearCart } = useCart();
+  const { user } = useAuth();
+  const router = useRouter();
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
+  async function handleCheckout() {
+    if (!user) {
+      router.push("/sign-in");
+      return;
+    }
+    setCheckoutLoading(true);
+    setCheckoutError(null);
+    const result = await createOrder(
+      items.map((i) => ({ id: i.id, price: i.price, quantity: i.quantity }))
+    );
+    if (result.error) {
+      setCheckoutError(result.error);
+      setCheckoutLoading(false);
+      return;
+    }
+    clearCart();
+    router.push("/customer/orders");
+  }
 
   if (items.length === 0) {
     return (
@@ -90,8 +117,16 @@ export default function CartPage() {
                   <span>Total</span>
                   <span className="text-primary">₱{totalPrice.toFixed(2)}</span>
                 </div>
-                <button className="mt-6 w-full rounded-full bg-secondary py-3.5 font-bold text-white transition-colors hover:bg-sky-500/100">
-                  Proceed to Checkout
+                {checkoutError && (
+                  <p className="mt-4 text-sm text-red-600">{checkoutError}</p>
+                )}
+                <button
+                  onClick={handleCheckout}
+                  disabled={checkoutLoading}
+                  className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-secondary py-3.5 font-bold text-white transition-colors hover:bg-sky-500/100 disabled:opacity-50"
+                >
+                  {checkoutLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+                  {checkoutLoading ? "Processing..." : "Proceed to Checkout"}
                 </button>
                 <Link href="/store" className="mt-3 block text-center text-sm text-primary hover:underline">
                   Continue Shopping

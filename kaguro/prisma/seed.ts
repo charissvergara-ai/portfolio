@@ -50,7 +50,7 @@ async function main() {
     },
   });
 
-  await prisma.user.create({
+  const customer = await prisma.user.create({
     data: {
       name: "Juan Dela Cruz",
       email: "juan@kaguro.ph",
@@ -95,8 +95,9 @@ async function main() {
     { title: "Weekly Lesson Plan Template", slug: "weekly-lesson-plan-template", description: "Clean and organized weekly lesson plan template. Editable in Word and Google Docs. Includes sample entries.", price: 39, image: "https://picsum.photos/seed/prod16/600/400", rating: 4.8, downloads: 467, categoryId: templates.id, vendorId: vendor1.id, createdAt: daysAgo(100) },
   ];
 
+  const createdProducts = [];
   for (const product of products) {
-    await prisma.product.create({ data: product });
+    createdProducts.push(await prisma.product.create({ data: product }));
   }
 
   // Create testimonials
@@ -111,8 +112,54 @@ async function main() {
     await prisma.testimonial.create({ data: t });
   }
 
+  // Create sample orders for the customer user
+  await prisma.order.create({
+    data: {
+      userId: customer.id,
+      total: createdProducts[0].salePrice! + createdProducts[2].salePrice!,
+      status: "COMPLETED",
+      createdAt: daysAgo(14),
+      items: {
+        create: [
+          { productId: createdProducts[0].id, price: createdProducts[0].salePrice! },
+          { productId: createdProducts[2].id, price: createdProducts[2].salePrice! },
+        ],
+      },
+    },
+  });
+
+  await prisma.order.create({
+    data: {
+      userId: customer.id,
+      total: createdProducts[5].salePrice! + createdProducts[8].salePrice! + createdProducts[4].price,
+      status: "COMPLETED",
+      createdAt: daysAgo(7),
+      items: {
+        create: [
+          { productId: createdProducts[5].id, price: createdProducts[5].salePrice! },
+          { productId: createdProducts[8].id, price: createdProducts[8].salePrice! },
+          { productId: createdProducts[4].id, price: createdProducts[4].price },
+        ],
+      },
+    },
+  });
+
+  await prisma.order.create({
+    data: {
+      userId: customer.id,
+      total: createdProducts[10].salePrice!,
+      status: "PENDING",
+      createdAt: daysAgo(1),
+      items: {
+        create: [
+          { productId: createdProducts[10].id, price: createdProducts[10].salePrice! },
+        ],
+      },
+    },
+  });
+
   console.log("Seed data created successfully!");
-  console.log(`Created ${products.length} products, ${testimonials.length} testimonials across ${categories.length} categories`);
+  console.log(`Created ${products.length} products, ${testimonials.length} testimonials, 3 orders across ${categories.length} categories`);
 }
 
 main()
