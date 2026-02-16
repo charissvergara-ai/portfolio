@@ -1,0 +1,55 @@
+<section class="dashboard">
+  <div class="container">
+    <div class="dashboard-header">
+      <div>
+        <h1>My Dashboard</h1>
+        <p>Welcome, {{ auth.user()?.name }}</p>
+      </div>
+      <a routerLink="/book" class="btn btn-primary">
+        <i class="fa-solid fa-calendar-plus"></i> Book Appointment
+      </a>
+    </div>
+
+    <h2 class="section-label">My Appointments</h2>
+
+    @if (loading()) {
+      <div class="loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading your appointments...</div>
+    } @else if (appointments().length === 0) {
+      <div class="empty-state">
+        <i class="fa-solid fa-calendar-xmark"></i>
+        <h3>No appointments yet</h3>
+        <p>You haven't booked any appointments. Schedule one now!</p>
+        <a routerLink="/book" class="btn btn-primary" style="margin-top: 1.5rem;">Book Appointment</a>
+      </div>
+    } @else {
+      <div class="appointments-grid">
+        @for (apt of appointments(); track apt.id) {
+          <div class="card appointment-card">
+            <div class="apt-header">
+              <span class="badge" [class]="getStatusClass(apt.status)">{{ apt.status }}</span>
+              <span class="apt-service">{{ apt.dentalConcern }}</span>
+            </div>
+            <div class="apt-details">
+              <div class="apt-detail">
+                <i class="fa-solid fa-calendar"></i>
+                <span>{{ apt.preferredDate }}</span>
+              </div>
+              <div class="apt-detail">
+                <i class="fa-solid fa-clock"></i>
+                <span>{{ apt.preferredTime }}</span>
+              </div>
+              <div class="apt-detail">
+                <i class="fa-solid fa-user"></i>
+                <span>{{ apt.fullName }}</span>
+              </div>
+              <div class="apt-detail">
+                <i class="fa-solid fa-phone"></i>
+                <span>{{ apt.contactNumber }}</span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</section>

@@ -1,0 +1,92 @@
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <h1>Smart Care for Brighter Smiles</h1>
+    <p class="hero-subtitle">
+      Welcome to Dentafy Dental Clinic, where compassionate care meets modern dentistry.
+      We are dedicated to providing high-quality, personalized dental services in a safe,
+      comfortable, and family-friendly environment.
+    </p>
+    <div class="hero-buttons">
+      <a routerLink="/book" class="btn btn-accent">Book Appointment</a>
+      <a routerLink="/services" class="btn btn-outline">Our Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- Services Overview -->
+<section class="section bg-light">
+  <div class="container">
+    <h2 class="section-title">Our Dental Services</h2>
+    <p class="section-subtitle">
+      From routine check-ups to advanced treatments, we offer a full range of dental services
+      for the whole family.
+    </p>
+    <div class="services-grid">
+      @for (service of services; track service.title) {
+        <a routerLink="/services" class="card service-card">
+          <i [class]="service.icon"></i>
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.description }}</p>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Why Choose Dentafy?</h2>
+    <p class="section-subtitle">
+      We are committed to making every visit stress-free and comfortable.
+    </p>
+    <div class="reasons-grid">
+      @for (reason of reasons; track reason) {
+        <div class="reason-item">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>{{ reason }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section bg-light">
+  <div class="container">
+    <h2 class="section-title">Patient Testimonials</h2>
+    <p class="section-subtitle">
+      Hear from our patients about their experience at Dentafy Dental Clinic.
+    </p>
+    <div class="testimonials-grid">
+      @for (t of testimonials; track t.author) {
+        <div class="card testimonial-card">
+          <i class="fa-solid fa-quote-left quote-icon"></i>
+          <p class="quote-text">{{ t.quote }}</p>
+          <div class="quote-author">
+            <i class="fa-solid fa-user-circle"></i>
+            <span>{{ t.author }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container cta-content">
+    <h2>Book Your Visit Today!</h2>
+    <p>
+      A healthy smile starts with proper dental care. Schedule your appointment today
+      and experience quality dental care you can trust.
+    </p>
+    <div class="cta-contact">
+      <p><i class="fa-solid fa-phone"></i> +63 912 345 6789</p>
+      <p><i class="fa-solid fa-envelope"></i> dentafyclinic&#64;gmail.com</p>
+    </div>
+    <a routerLink="/book" class="btn btn-accent">Schedule Appointment</a>
+  </div>
+</section>

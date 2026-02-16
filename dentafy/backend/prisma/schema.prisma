@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  password     String
+  name         String
+  role         String        @default("CUSTOMER")
+  createdAt    DateTime      @default(now())
+  appointments Appointment[]
+}
+
+model Appointment {
+  id            String   @id @default(cuid())
+  fullName      String
+  contactNumber String
+  preferredDate String
+  preferredTime String
+  dentalConcern String
+  status        String   @default("PENDING")
+  createdAt     DateTime @default(now())
+  userId        String?
+  user          User?    @relation(fields: [userId], references: [id])
+}
+
+model Inquiry {
+  id            String   @id @default(cuid())
+  name          String
+  email         String
+  contactNumber String
+  message       String
+  createdAt     DateTime @default(now())
+}
+
+model Service {
+  id        String @id @default(cuid())
+  category  String
+  title     String
+  icon      String
+  sortOrder Int
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  quote     String
+  author    String
+  createdAt DateTime @default(now())
+}

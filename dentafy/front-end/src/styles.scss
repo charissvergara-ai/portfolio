@@ -1,0 +1,243 @@
+// ==========================================
+// Dentafy Dental Clinic — Global Styles
+// ==========================================
+
+@use 'variables' as *;
+
+// ==========================================
+// Reset & Base
+// ==========================================
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-body;
+  font-size: 16px;
+  line-height: 1.6;
+  color: $text-dark;
+  background-color: $white;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: $primary;
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover {
+    color: $primary-dark;
+  }
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+// ==========================================
+// Typography
+// ==========================================
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-heading;
+  font-weight: 700;
+  line-height: 1.3;
+  color: $text-dark;
+}
+
+h1 { font-size: 2.75rem; }
+h2 { font-size: 2.25rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+
+@media (max-width: $tablet) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.25rem; }
+}
+
+// ==========================================
+// Layout Utilities
+// ==========================================
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+
+  @media (max-width: $mobile) {
+    padding: 0 1rem;
+  }
+}
+
+.section {
+  padding: 5rem 0;
+
+  @media (max-width: $tablet) {
+    padding: 3rem 0;
+  }
+}
+
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.75rem;
+  color: $text-dark;
+
+  @media (max-width: $tablet) {
+    font-size: 1.75rem;
+  }
+}
+
+.section-subtitle {
+  text-align: center;
+  color: $text-medium;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+}
+
+// ==========================================
+// Buttons
+// ==========================================
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  font-family: $font-heading;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+.btn-primary {
+  background-color: $primary;
+  color: $white;
+
+  &:hover {
+    background-color: $primary-dark;
+    color: $white;
+  }
+}
+
+.btn-accent {
+  background-color: $accent;
+  color: $white;
+
+  &:hover {
+    background-color: $accent-dark;
+    color: $white;
+  }
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: $white;
+  border: 2px solid $white;
+
+  &:hover {
+    background-color: $white;
+    color: $primary;
+  }
+}
+
+// ==========================================
+// Form Elements
+// ==========================================
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: $text-dark;
+  margin-bottom: 0.5rem;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: $font-body;
+  font-size: 0.9375rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  background-color: $white;
+  color: $text-dark;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba($primary, 0.1);
+  }
+
+  &.ng-invalid.ng-touched {
+    border-color: $danger;
+  }
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-error {
+  color: $danger;
+  font-size: 0.8125rem;
+  margin-top: 0.25rem;
+}
+
+// ==========================================
+// Cards
+// ==========================================
+.card {
+  background: $white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+}
+
+// ==========================================
+// Utility Classes
+// ==========================================
+.text-primary { color: $primary; }
+.text-accent { color: $accent; }
+.text-medium { color: $text-medium; }
+.text-center { text-align: center; }
+.font-heading { font-family: $font-heading; }
+.bg-light { background-color: $light-gray; }
+.bg-off-white { background-color: $off-white; }

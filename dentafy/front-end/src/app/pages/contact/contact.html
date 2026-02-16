@@ -1,0 +1,147 @@
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container">
+    <h1>Contact Us</h1>
+    <p>Have questions? We'd love to hear from you. Reach out anytime.</p>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="section">
+  <div class="container contact-grid">
+    <!-- Contact Info -->
+    <div class="contact-info">
+      <h2>Get in Touch</h2>
+      <p class="info-subtitle">
+        For questions about treatments, rates, insurance, or promotions, feel free to contact us.
+        Our staff will respond within 24 hours.
+      </p>
+
+      <div class="info-cards">
+        <div class="info-card">
+          <i class="fa-solid fa-location-dot"></i>
+          <div>
+            <h4>Clinic Address</h4>
+            <p>Unit 5, 2nd Floor, Smile Medical Building, Quezon City, Philippines</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <i class="fa-solid fa-phone"></i>
+          <div>
+            <h4>Mobile</h4>
+            <p>+63 912 345 6789</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <i class="fa-solid fa-envelope"></i>
+          <div>
+            <h4>Email</h4>
+            <p>dentafyclinic&#64;gmail.com</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <i class="fa-brands fa-facebook"></i>
+          <div>
+            <h4>Facebook</h4>
+            <p>Dentafy Dental Clinic</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clinic Hours -->
+      <div class="hours-section">
+        <h3>Clinic Hours</h3>
+        @for (h of hours; track h.day) {
+          <div class="hours-row" [class.closed]="h.time === 'Closed'">
+            <span class="hours-day">{{ h.day }}</span>
+            <span class="hours-time">{{ h.time }}</span>
+          </div>
+        }
+        <p class="hours-note">Extended hours available by appointment.</p>
+      </div>
+    </div>
+
+    <!-- Inquiry Form -->
+    <div class="form-wrapper">
+      @if (submitted()) {
+        <div class="success-message">
+          <i class="fa-solid fa-circle-check"></i>
+          <h3>Message Sent!</h3>
+          <p>Thank you for reaching out. Our staff will respond within 24 hours.</p>
+          <button class="btn btn-primary" (click)="resetForm()">Send Another Message</button>
+        </div>
+      } @else {
+        <h2>Send Us a Message</h2>
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label class="form-label" for="name">Name</label>
+            <input
+              class="form-input"
+              id="name"
+              type="text"
+              formControlName="name"
+              placeholder="Your full name"
+            />
+            @if (contactForm.get('name')?.invalid && contactForm.get('name')?.touched) {
+              <p class="form-error">Name is required.</p>
+            }
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address</label>
+            <input
+              class="form-input"
+              id="email"
+              type="email"
+              formControlName="email"
+              placeholder="you&#64;example.com"
+            />
+            @if (contactForm.get('email')?.invalid && contactForm.get('email')?.touched) {
+              <p class="form-error">Please enter a valid email address.</p>
+            }
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="contactNumber">Contact Number</label>
+            <input
+              class="form-input"
+              id="contactNumber"
+              type="tel"
+              formControlName="contactNumber"
+              placeholder="+63 912 345 6789"
+            />
+            @if (contactForm.get('contactNumber')?.invalid && contactForm.get('contactNumber')?.touched) {
+              <p class="form-error">Contact number is required.</p>
+            }
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="message">Message</label>
+            <textarea
+              class="form-textarea"
+              id="message"
+              formControlName="message"
+              placeholder="How can we help you?"
+              rows="5"
+            ></textarea>
+            @if (contactForm.get('message')?.invalid && contactForm.get('message')?.touched) {
+              <p class="form-error">Please enter at least 10 characters.</p>
+            }
+          </div>
+
+          @if (error()) {
+            <p class="form-error submit-error">{{ error() }}</p>
+          }
+
+          <button type="submit" class="btn btn-primary btn-full" [disabled]="submitting()">
+            @if (submitting()) {
+              <i class="fa-solid fa-spinner fa-spin"></i> Sending...
+            } @else {
+              <i class="fa-solid fa-paper-plane"></i> Send Message
+            }
+          </button>
+        </form>
+      }
+    </div>
+  </div>
+</section>

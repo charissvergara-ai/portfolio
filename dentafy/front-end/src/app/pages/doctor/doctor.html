@@ -1,0 +1,113 @@
+<section class="dashboard">
+  <div class="container">
+    <div class="dashboard-header">
+      <div>
+        <h1>Doctor Dashboard</h1>
+        <p>Welcome, {{ auth.user()?.name }}</p>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button
+        class="tab"
+        [class.active]="activeTab() === 'appointments'"
+        (click)="setTab('appointments')"
+      >
+        <i class="fa-solid fa-calendar-check"></i>
+        Appointments ({{ appointments().length }})
+      </button>
+      <button
+        class="tab"
+        [class.active]="activeTab() === 'inquiries'"
+        (click)="setTab('inquiries')"
+      >
+        <i class="fa-solid fa-envelope"></i>
+        Inquiries ({{ inquiries().length }})
+      </button>
+    </div>
+
+    <!-- Appointments Tab -->
+    @if (activeTab() === 'appointments') {
+      @if (loading()) {
+        <div class="loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading appointments...</div>
+      } @else if (appointments().length === 0) {
+        <div class="empty-state">
+          <i class="fa-solid fa-calendar-xmark"></i>
+          <h3>No appointments yet</h3>
+          <p>Appointments will appear here once patients book them.</p>
+        </div>
+      } @else {
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Patient</th>
+                <th>Contact</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Service</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (apt of appointments(); track apt.id) {
+                <tr>
+                  <td>{{ apt.fullName }}</td>
+                  <td>{{ apt.contactNumber }}</td>
+                  <td>{{ apt.preferredDate }}</td>
+                  <td>{{ apt.preferredTime }}</td>
+                  <td>{{ apt.dentalConcern }}</td>
+                  <td><span class="badge" [class]="getStatusClass(apt.status)">{{ apt.status }}</span></td>
+                  <td class="actions">
+                    @if (apt.status === 'PENDING') {
+                      <button class="btn-sm-action confirm" (click)="updateStatus(apt.id, 'CONFIRMED')">
+                        <i class="fa-solid fa-check"></i>
+                      </button>
+                      <button class="btn-sm-action cancel" (click)="updateStatus(apt.id, 'CANCELLED')">
+                        <i class="fa-solid fa-xmark"></i>
+                      </button>
+                    }
+                    @if (apt.status === 'CONFIRMED') {
+                      <button class="btn-sm-action complete" (click)="updateStatus(apt.id, 'COMPLETED')">
+                        <i class="fa-solid fa-flag-checkered"></i>
+                      </button>
+                    }
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    }
+
+    <!-- Inquiries Tab -->
+    @if (activeTab() === 'inquiries') {
+      @if (inquiries().length === 0) {
+        <div class="empty-state">
+          <i class="fa-solid fa-inbox"></i>
+          <h3>No inquiries yet</h3>
+          <p>Messages from the contact form will appear here.</p>
+        </div>
+      } @else {
+        <div class="inquiries-grid">
+          @for (inq of inquiries(); track inq.id) {
+            <div class="card inquiry-card">
+              <div class="inquiry-header">
+                <h4>{{ inq.name }}</h4>
+                <span class="inquiry-date">{{ inq.createdAt | date:'mediumDate' }}</span>
+              </div>
+              <p class="inquiry-contact">
+                <i class="fa-solid fa-envelope"></i> {{ inq.email }}
+                <i class="fa-solid fa-phone"></i> {{ inq.contactNumber }}
+              </p>
+              <p class="inquiry-message">{{ inq.message }}</p>
+            </div>
+          }
+        </div>
+      }
+    }
+  </div>
+</section>

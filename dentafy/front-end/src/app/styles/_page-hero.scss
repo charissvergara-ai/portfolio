@@ -1,0 +1,26 @@
+@use 'variables' as *;
+
+.page-hero {
+  background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+  color: $white;
+  padding: 4rem 0;
+  text-align: center;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: $white;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    opacity: 0.92;
+  }
+}
+
+@media (max-width: $tablet) {
+  .page-hero h1 {
+    font-size: 2rem;
+  }
+}

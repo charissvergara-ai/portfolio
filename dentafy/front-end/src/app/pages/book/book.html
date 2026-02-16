@@ -1,0 +1,177 @@
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container">
+    <h1>Book an Appointment</h1>
+    <p>Scheduling your dental visit at Dentafy is simple and convenient.</p>
+  </div>
+</section>
+
+<!-- Booking Section -->
+<section class="section">
+  <div class="container booking-grid">
+    <!-- Booking Info -->
+    <div class="booking-info">
+      <h2>How to Book</h2>
+      <p>You can schedule your appointment through any of the following:</p>
+
+      <div class="booking-methods">
+        <div class="method">
+          <i class="fa-solid fa-phone"></i>
+          <div>
+            <h4>Call or Text</h4>
+            <p>+63 912 345 6789</p>
+          </div>
+        </div>
+        <div class="method">
+          <i class="fa-solid fa-envelope"></i>
+          <div>
+            <h4>Email</h4>
+            <p>dentafyclinic&#64;gmail.com</p>
+          </div>
+        </div>
+        <div class="method">
+          <i class="fa-brands fa-facebook"></i>
+          <div>
+            <h4>Facebook</h4>
+            <p>Dentafy Dental Clinic</p>
+          </div>
+        </div>
+        <div class="method">
+          <i class="fa-solid fa-globe"></i>
+          <div>
+            <h4>Online Form</h4>
+            <p>Fill out the form on this page</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <h3><i class="fa-solid fa-clock"></i> Clinic Hours</h3>
+        <p>Monday – Friday: 9:00 AM – 6:00 PM</p>
+        <p>Saturday: 9:00 AM – 4:00 PM</p>
+        <p>Sunday: Closed</p>
+        <p class="note">Extended hours available by appointment.</p>
+      </div>
+
+      <div class="info-box">
+        <h3><i class="fa-solid fa-circle-info"></i> What to Provide</h3>
+        <ul>
+          <li>Full Name</li>
+          <li>Contact Number</li>
+          <li>Preferred Date & Time</li>
+          <li>Dental Concern or Service Needed</li>
+        </ul>
+        <p class="note">Our team will confirm your appointment as soon as possible.</p>
+      </div>
+    </div>
+
+    <!-- Booking Form -->
+    <div class="form-wrapper">
+      @if (submitted()) {
+        <div class="success-message">
+          <i class="fa-solid fa-calendar-check"></i>
+          <h3>Appointment Requested!</h3>
+          <p>
+            Thank you for booking with Dentafy. Our team will contact you to confirm your
+            appointment schedule.
+          </p>
+          <button class="btn btn-primary" (click)="resetForm()">Book Another Appointment</button>
+        </div>
+      } @else {
+        <h2>Request an Appointment</h2>
+        <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label class="form-label" for="fullName">Full Name</label>
+            <input
+              class="form-input"
+              id="fullName"
+              type="text"
+              formControlName="fullName"
+              placeholder="Juan Dela Cruz"
+            />
+            @if (bookingForm.get('fullName')?.invalid && bookingForm.get('fullName')?.touched) {
+              <p class="form-error">Full name is required.</p>
+            }
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="contactNumber">Contact Number</label>
+            <input
+              class="form-input"
+              id="contactNumber"
+              type="tel"
+              formControlName="contactNumber"
+              placeholder="+63 912 345 6789"
+            />
+            @if (bookingForm.get('contactNumber')?.invalid && bookingForm.get('contactNumber')?.touched) {
+              <p class="form-error">Contact number is required.</p>
+            }
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="preferredDate">Preferred Date</label>
+              <input
+                class="form-input"
+                id="preferredDate"
+                type="date"
+                formControlName="preferredDate"
+              />
+              @if (bookingForm.get('preferredDate')?.invalid && bookingForm.get('preferredDate')?.touched) {
+                <p class="form-error">Please select a date.</p>
+              }
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="preferredTime">Preferred Time</label>
+              <select class="form-select" id="preferredTime" formControlName="preferredTime">
+                <option value="" disabled>Select a time</option>
+                @for (slot of timeSlots; track slot) {
+                  <option [value]="slot">{{ slot }}</option>
+                }
+              </select>
+              @if (bookingForm.get('preferredTime')?.invalid && bookingForm.get('preferredTime')?.touched) {
+                <p class="form-error">Please select a time.</p>
+              }
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="dentalConcern">Dental Concern / Service Needed</label>
+            <select class="form-select" id="dentalConcern" formControlName="dentalConcern">
+              <option value="" disabled>Select a service</option>
+              @for (service of serviceOptions; track service) {
+                <option [value]="service">{{ service }}</option>
+              }
+            </select>
+            @if (bookingForm.get('dentalConcern')?.invalid && bookingForm.get('dentalConcern')?.touched) {
+              <p class="form-error">Please select a service.</p>
+            }
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="notes">Additional Notes (Optional)</label>
+            <textarea
+              class="form-textarea"
+              id="notes"
+              formControlName="notes"
+              placeholder="Any additional details or concerns..."
+              rows="3"
+            ></textarea>
+          </div>
+
+          @if (error()) {
+            <p class="form-error submit-error">{{ error() }}</p>
+          }
+
+          <button type="submit" class="btn btn-primary btn-full" [disabled]="submitting()">
+            @if (submitting()) {
+              <i class="fa-solid fa-spinner fa-spin"></i> Submitting...
+            } @else {
+              <i class="fa-solid fa-calendar-plus"></i> Request Appointment
+            }
+          </button>
+        </form>
+      }
+    </div>
+  </div>
+</section>

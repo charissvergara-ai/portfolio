@@ -2,6 +2,25 @@
 
 This repository contains frontend projects created as portfolio pieces.
 
+## Full-Stack Projects
+
+- **dentafy** — path: `dentafy`
+  - Description: Full-stack dental clinic web application with appointment booking, contact inquiries, and role-based dashboards for doctors and customers. Backend is a GraphQL API (Express + Apollo Server) with PostgreSQL via Prisma 7 and JWT authentication. Frontend is an Angular 21 SPA with standalone components, Signals, reactive forms, and SCSS. Includes 88 unit tests across backend and frontend using Vitest.
+  - Run:
+    ```bash
+    cd dentafy/backend
+    npm install
+    npx prisma dev            # Start local PostgreSQL (keep running)
+    npx prisma migrate dev    # Run migrations (new terminal)
+    npx prisma generate
+    npm run seed
+    npm run dev
+
+    cd dentafy/front-end
+    npm install
+    npm start
+    ```
+
 ## Angular Projects
 
 - **helping-hands** — path: `helping-hands`
@@ -41,7 +60,7 @@ This repository contains frontend projects created as portfolio pieces.
   - Description: Small e-commerce style shop for flowers.
   - Run:
     ```bash
-    cd flower-shop
+    cd flower-shop  
     npm install
     npm run dev
     ```
@@ -56,9 +75,10 @@ This repository contains frontend projects created as portfolio pieces.
 
 ## Notes
 
-- React projects use Vite. Angular project uses Angular CLI. Next.js project uses Turbopack.
+- React projects use Vite. Angular projects use Angular CLI. Next.js project uses Turbopack. Dentafy uses Express + Apollo Server (backend) and Angular CLI (frontend).
 - Ensure Node.js (LTS) is installed.
 - To build for production:
   - React projects: `npm run build`
-  - Angular project: `ng build`
+  - Angular projects: `ng build` / `npm run build`
   - Next.js project: `npm run build`
+  - Dentafy backend: `npm run build`

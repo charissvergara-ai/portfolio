@@ -1,0 +1,38 @@
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container">
+    <h1>Our Dental Services</h1>
+    <p>From routine check-ups to advanced treatments, we provide comprehensive dental care for the whole family.</p>
+  </div>
+</section>
+
+<!-- Services List -->
+<section class="section">
+  <div class="container">
+    @for (category of categories; track category.title; let i = $index) {
+      <div class="service-category" [class.alt]="i % 2 !== 0">
+        <div class="category-header">
+          <i [class]="category.icon"></i>
+          <h2>{{ category.title }}</h2>
+        </div>
+        <ul class="service-list">
+          @for (service of category.services; track service) {
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <span>{{ service }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container cta-content">
+    <h2>Ready to Get Started?</h2>
+    <p>Book your appointment today and take the first step toward a healthier, brighter smile.</p>
+    <a routerLink="/book" class="btn btn-accent">Book Appointment</a>
+  </div>
+</section>

@@ -1,0 +1,185 @@
+@use 'variables' as *;
+@use 'cta';
+
+// Hero
+.hero {
+  position: relative;
+  background: url('/images/hero-banner.jpg') center/cover no-repeat;
+  color: $white;
+  padding: 6rem 0;
+  text-align: center;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba($primary, 0.85) 0%, rgba($primary-dark, 0.9) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1.25rem;
+    color: $white;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.hero-subtitle {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  opacity: 0.95;
+  margin-bottom: 2.5rem;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+// Services Grid
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.service-card {
+  text-align: center;
+  text-decoration: none;
+  color: $text-dark;
+  cursor: pointer;
+
+  i {
+    font-size: 2.5rem;
+    color: $primary;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 0.9375rem;
+    color: $text-medium;
+    line-height: 1.6;
+  }
+}
+
+// Reasons
+.reasons-grid {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.reason-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.0625rem;
+
+  i {
+    font-size: 1.5rem;
+    color: $primary;
+    flex-shrink: 0;
+  }
+}
+
+// Testimonials
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.testimonial-card {
+  position: relative;
+
+  .quote-icon {
+    font-size: 1.75rem;
+    color: $accent;
+    margin-bottom: 1rem;
+  }
+
+  .quote-text {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: $text-dark;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+  }
+
+  .quote-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
+    color: $primary;
+
+    i {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+// CTA overrides
+.cta-content > p {
+  margin-bottom: 1.5rem;
+}
+
+.cta-contact {
+  margin-bottom: 2rem;
+
+  p {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+
+    i {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: $tablet) {
+  .hero {
+    padding: 4rem 0;
+    min-height: 400px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.25rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) and (max-width: $desktop) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

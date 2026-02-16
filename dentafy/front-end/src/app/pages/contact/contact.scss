@@ -1,0 +1,111 @@
+@use 'variables' as *;
+@use 'page-hero';
+@use 'forms';
+
+// Contact Grid
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.contact-info {
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .info-subtitle {
+    color: $text-medium;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+}
+
+.info-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+
+  > i {
+    font-size: 1.25rem;
+    color: $primary;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: $light-gray;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  h4 {
+    font-size: 0.9375rem;
+    margin-bottom: 0.125rem;
+  }
+
+  p {
+    font-size: 0.875rem;
+    color: $text-medium;
+  }
+}
+
+// Hours
+.hours-section {
+  h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.625rem 0;
+  border-bottom: 1px solid #e2e8f0;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  &.closed .hours-time {
+    color: $danger;
+  }
+}
+
+.hours-day {
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.hours-time {
+  color: $text-medium;
+  font-size: 0.9375rem;
+}
+
+.hours-note {
+  font-size: 0.8125rem;
+  color: $text-medium;
+  font-style: italic;
+  margin-top: 0.75rem;
+}
+
+.success-message i {
+  color: $success;
+}
+
+@media (max-width: $tablet) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}

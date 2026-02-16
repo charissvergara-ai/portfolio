@@ -1,0 +1,60 @@
+@use 'variables' as *;
+
+.form-wrapper {
+  background: $white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 2.5rem;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.submit-error {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 0.9375rem;
+}
+
+.success-message {
+  text-align: center;
+  padding: 2rem 0;
+
+  i {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    color: $text-medium;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: $tablet) {
+  .form-wrapper {
+    padding: 1.5rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
