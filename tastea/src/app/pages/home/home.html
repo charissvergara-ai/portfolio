@@ -1,0 +1,94 @@
+<!-- Hero Section with Banner Background behind Gradient -->
+<section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+  <!-- Background Image (bottom layer) -->
+  <div class="absolute inset-0 banner-bg"></div>
+  <!-- Original gradient overlay (semi-transparent so image shows through) -->
+  <div class="absolute inset-0 bg-gradient-to-br from-primary-200/90 via-primary-100/80 to-secondary-100/90"></div>
+
+  <div class="relative text-center px-4 max-w-4xl mx-auto">
+    <!-- Logo circle -->
+    <div class="w-32 h-32 rounded-full border-4 border-accent-800 flex items-center justify-center mx-auto mb-8 bg-white/80 backdrop-blur-sm relative">
+      <span class="text-5xl font-heading text-accent-900">T</span>
+      <span class="text-secondary-400 text-2xl absolute top-2 right-4">🌱</span>
+    </div>
+
+    <h1 class="text-6xl md:text-8xl lg:text-9xl font-heading text-accent-900 mb-2 drop-shadow-sm">
+      Tastea
+    </h1>
+    <p class="uppercase tracking-[0.3em] text-accent-500 text-sm md:text-base mb-6 font-medium">and more</p>
+    <div class="w-48 h-1 bg-primary-300 mx-auto mb-8 rounded-full"></div>
+    <p class="text-xl md:text-2xl text-accent-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+      Where every sip tells a story. Premium teas, handcrafted coffees, and freshly baked pastries — all in one cozy place.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a routerLink="/menu"
+         class="px-8 py-4 bg-primary-400 text-white rounded-full text-lg font-semibold hover:bg-primary-500 transition-all duration-300 hover:scale-105 shadow-lg">
+        View Our Menu
+      </a>
+      <a routerLink="/about"
+         class="px-8 py-4 bg-white text-accent-800 rounded-full text-lg font-semibold hover:bg-accent-50 transition-all duration-300 shadow-md border border-accent-200">
+        About Us
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Items -->
+<section class="py-20 px-4 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12">
+      <p class="text-secondary-500 text-sm uppercase tracking-widest mb-2 font-medium">Our Favorites</p>
+      <h2 class="text-3xl md:text-4xl text-accent-900 font-heading">Featured Drinks & Treats</h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (item of featuredItems; track item.id) {
+        <app-menu-card [item]="item" (addToCart)="onAddToCart($event)"></app-menu-card>
+      }
+    </div>
+    <div class="text-center mt-10">
+      <a routerLink="/menu"
+         class="inline-block px-8 py-3 border-2 border-primary-400 text-primary-600 rounded-full font-semibold hover:bg-primary-400 hover:text-white transition-all duration-300">
+        See Full Menu →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Why Tastea -->
+<section class="py-20 px-4 bg-primary-50">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12">
+      <p class="text-secondary-500 text-sm uppercase tracking-widest mb-2 font-medium">Why Choose Us</p>
+      <h2 class="text-3xl md:text-4xl text-accent-900 font-heading">The Tastea Difference</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      @for (value of values; track value.title) {
+        <div class="text-center p-8 rounded-2xl bg-white hover:shadow-lg transition-shadow duration-300">
+          <span class="text-5xl mb-4 inline-block">{{ value.icon }}</span>
+          <h3 class="text-xl font-heading text-accent-900 mb-3">{{ value.title }}</h3>
+          <p class="text-accent-600 leading-relaxed">{{ value.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 px-4 bg-gradient-to-r from-primary-300 via-primary-200 to-secondary-200 text-center">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-3xl md:text-4xl font-heading text-accent-900 mb-4">Ready for Your Next Cup?</h2>
+    <p class="text-lg text-accent-600 mb-8">
+      Stop by our tea house or order online for pickup. We can't wait to serve you.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a routerLink="/menu"
+         class="px-8 py-4 bg-accent-800 text-white rounded-full text-lg font-semibold hover:bg-accent-900 transition-all duration-300 shadow-lg">
+        Order Now
+      </a>
+      <a routerLink="/contact"
+         class="px-8 py-4 bg-white text-accent-800 rounded-full text-lg font-semibold hover:bg-accent-50 transition-all shadow-md border border-accent-200">
+        Visit Us
+      </a>
+    </div>
+  </div>
+</section>

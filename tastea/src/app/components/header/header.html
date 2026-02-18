@@ -1,0 +1,135 @@
+<header
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+  [class.bg-white/95]="solidHeader()"
+  [class.backdrop-blur-md]="solidHeader()"
+  [class.shadow-lg]="solidHeader()"
+  [class.bg-transparent]="!solidHeader()"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      <!-- Logo -->
+      <a routerLink="/" class="flex items-center gap-3 group" (click)="closeMobileMenu()">
+        <div class="w-12 h-12 rounded-full border-2 border-accent-800 flex items-center justify-center bg-white group-hover:border-primary-500 transition-colors relative">
+          <span class="text-xl font-heading text-accent-900 leading-none">T</span>
+          <span class="text-secondary-400 text-xs absolute -top-0.5 right-0.5">🌱</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-2xl font-heading text-accent-900 group-hover:text-primary-600 transition-colors leading-tight">
+            Tastea
+          </span>
+          <span class="text-[10px] uppercase tracking-[0.2em] text-accent-400 font-medium">and more</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a routerLink="/" routerLinkActive="text-primary-600 font-semibold" [routerLinkActiveOptions]="{exact: true}"
+           class="text-accent-700 hover:text-primary-600 transition-colors font-medium">
+          Home
+        </a>
+        <a routerLink="/menu" routerLinkActive="text-primary-600 font-semibold"
+           class="text-accent-700 hover:text-primary-600 transition-colors font-medium">
+          Menu
+        </a>
+        <a routerLink="/about" routerLinkActive="text-primary-600 font-semibold"
+           class="text-accent-700 hover:text-primary-600 transition-colors font-medium">
+          About
+        </a>
+        <a routerLink="/contact" routerLinkActive="text-primary-600 font-semibold"
+           class="text-accent-700 hover:text-primary-600 transition-colors font-medium">
+          Contact
+        </a>
+        @if (authService.isLoggedIn()) {
+          <a routerLink="/admin" routerLinkActive="text-primary-600 font-semibold"
+             class="text-accent-700 hover:text-primary-600 transition-colors font-medium">
+            Dashboard
+          </a>
+          <a routerLink="/admin/reports" routerLinkActive="text-primary-600 font-semibold"
+             class="text-accent-700 hover:text-primary-600 transition-colors font-medium">
+            Reports
+          </a>
+        } @else {
+          <a routerLink="/admin/login" routerLinkActive="text-primary-600 font-semibold"
+             class="text-accent-700 hover:text-primary-600 transition-colors font-medium">
+            Admin
+          </a>
+        }
+        <a routerLink="/cart"
+           class="relative flex items-center gap-1 bg-primary-400 text-white px-4 py-2 rounded-full hover:bg-primary-500 transition-colors font-medium">
+          <span>🛒</span>
+          <span>Cart</span>
+          @if (cartService.itemCount() > 0) {
+            <span class="absolute -top-2 -right-2 bg-secondary-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+              {{ cartService.itemCount() }}
+            </span>
+          }
+        </a>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <div class="flex items-center gap-3 md:hidden">
+        <a routerLink="/cart" class="relative" (click)="closeMobileMenu()">
+          <span class="text-2xl">🛒</span>
+          @if (cartService.itemCount() > 0) {
+            <span class="absolute -top-2 -right-2 bg-secondary-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+              {{ cartService.itemCount() }}
+            </span>
+          }
+        </a>
+        <button (click)="toggleMobileMenu()" class="text-accent-700 p-2" aria-label="Toggle menu">
+          @if (mobileMenuOpen()) {
+            <span class="text-2xl">✕</span>
+          } @else {
+            <span class="text-2xl">☰</span>
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  @if (mobileMenuOpen()) {
+    <div class="md:hidden bg-white border-t border-primary-100 shadow-lg">
+      <nav class="flex flex-col px-4 py-4 gap-1">
+        <a routerLink="/" routerLinkActive="bg-primary-50 text-primary-700" [routerLinkActiveOptions]="{exact: true}"
+           class="px-4 py-3 rounded-lg text-accent-700 hover:bg-primary-50 transition-colors font-medium"
+           (click)="closeMobileMenu()">
+          Home
+        </a>
+        <a routerLink="/menu" routerLinkActive="bg-primary-50 text-primary-700"
+           class="px-4 py-3 rounded-lg text-accent-700 hover:bg-primary-50 transition-colors font-medium"
+           (click)="closeMobileMenu()">
+          Menu
+        </a>
+        <a routerLink="/about" routerLinkActive="bg-primary-50 text-primary-700"
+           class="px-4 py-3 rounded-lg text-accent-700 hover:bg-primary-50 transition-colors font-medium"
+           (click)="closeMobileMenu()">
+          About
+        </a>
+        <a routerLink="/contact" routerLinkActive="bg-primary-50 text-primary-700"
+           class="px-4 py-3 rounded-lg text-accent-700 hover:bg-primary-50 transition-colors font-medium"
+           (click)="closeMobileMenu()">
+          Contact
+        </a>
+        @if (authService.isLoggedIn()) {
+          <a routerLink="/admin" routerLinkActive="bg-primary-50 text-primary-700"
+             class="px-4 py-3 rounded-lg text-accent-700 hover:bg-primary-50 transition-colors font-medium"
+             (click)="closeMobileMenu()">
+            Dashboard
+          </a>
+          <a routerLink="/admin/reports" routerLinkActive="bg-primary-50 text-primary-700"
+             class="px-4 py-3 rounded-lg text-accent-700 hover:bg-primary-50 transition-colors font-medium"
+             (click)="closeMobileMenu()">
+            Reports
+          </a>
+        } @else {
+          <a routerLink="/admin/login" routerLinkActive="bg-primary-50 text-primary-700"
+             class="px-4 py-3 rounded-lg text-accent-700 hover:bg-primary-50 transition-colors font-medium"
+             (click)="closeMobileMenu()">
+            Admin
+          </a>
+        }
+      </nav>
+    </div>
+  }
+</header>

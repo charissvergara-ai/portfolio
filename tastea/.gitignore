@@ -1,0 +1,21 @@
+# Dependencies
+/node_modules
+
+# Build
+/dist
+/out-tsc
+
+# IDE
+/.idea
+/.vscode/*
+!/.vscode/extensions.json
+*.swp
+*.swo
+
+# Misc
+/.angular/cache
+.DS_Store
+Thumbs.db
+
+# Testing
+/coverage

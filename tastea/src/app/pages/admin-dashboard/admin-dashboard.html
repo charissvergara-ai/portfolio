@@ -1,0 +1,253 @@
+<!-- Admin Header -->
+<section class="bg-accent-800 text-white pt-24 pb-6 px-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-heading mb-1">Order Dashboard</h1>
+      <p class="text-white/60 text-sm">Manage and track all orders</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <a routerLink="/admin/reports"
+         class="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-sm font-medium transition-colors">
+        Reports
+      </a>
+      <button
+        (click)="logout()"
+        class="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-sm font-medium transition-colors">
+        Sign Out
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<section class="bg-white border-b border-accent-100 px-4 py-4">
+  <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-4">
+    <div class="bg-primary-50 rounded-xl p-4 text-center">
+      <p class="text-2xl font-bold text-accent-900">{{ orderService.allOrders().length }}</p>
+      <p class="text-xs text-accent-500 uppercase tracking-wider">Total Orders</p>
+    </div>
+    <div class="bg-yellow-50 rounded-xl p-4 text-center">
+      <p class="text-2xl font-bold text-yellow-700">{{ orderService.pendingOrders().length }}</p>
+      <p class="text-xs text-accent-500 uppercase tracking-wider">Pending</p>
+    </div>
+    <div class="bg-blue-50 rounded-xl p-4 text-center">
+      <p class="text-2xl font-bold text-blue-700">{{ orderService.preparingOrders().length }}</p>
+      <p class="text-xs text-accent-500 uppercase tracking-wider">Preparing</p>
+    </div>
+    <div class="bg-green-50 rounded-xl p-4 text-center">
+      <p class="text-2xl font-bold text-green-700">{{ orderService.readyOrders().length }}</p>
+      <p class="text-xs text-accent-500 uppercase tracking-wider">Ready</p>
+    </div>
+    <div class="bg-secondary-50 rounded-xl p-4 text-center col-span-2 md:col-span-1">
+      <p class="text-2xl font-bold text-secondary-700">{{ orderService.todayRevenue() | currency }}</p>
+      <p class="text-xs text-accent-500 uppercase tracking-wider">Revenue</p>
+    </div>
+  </div>
+</section>
+
+<!-- Tabs & Filters -->
+<section class="bg-white border-b border-accent-100 px-4 py-3">
+  <div class="max-w-7xl mx-auto flex flex-col gap-3">
+    <div class="flex flex-wrap items-center gap-4">
+      <!-- Order Type Tabs -->
+      <div class="flex bg-accent-50 rounded-lg p-1 gap-1">
+        <button
+          (click)="setTab('all')"
+          [class]="activeTab() === 'all' ? 'bg-white shadow-sm text-accent-900' : 'text-accent-500 hover:text-accent-700'"
+          class="px-4 py-1.5 rounded-md text-sm font-medium transition-all">
+          All
+        </button>
+        <button
+          (click)="setTab('online')"
+          [class]="activeTab() === 'online' ? 'bg-white shadow-sm text-accent-900' : 'text-accent-500 hover:text-accent-700'"
+          class="px-4 py-1.5 rounded-md text-sm font-medium transition-all">
+          Online
+        </button>
+        <button
+          (click)="setTab('dine-in')"
+          [class]="activeTab() === 'dine-in' ? 'bg-white shadow-sm text-accent-900' : 'text-accent-500 hover:text-accent-700'"
+          class="px-4 py-1.5 rounded-md text-sm font-medium transition-all">
+          Dine-In
+        </button>
+      </div>
+
+      <!-- Status Filter -->
+      <div class="flex flex-wrap gap-2">
+        @for (status of ['all', 'pending', 'preparing', 'ready', 'completed', 'cancelled']; track status) {
+          <button
+            (click)="setFilter($any(status))"
+            [class]="filterStatus() === status ? 'bg-accent-800 text-white' : 'bg-accent-100 text-accent-600 hover:bg-accent-200'"
+            class="px-3 py-1 rounded-full text-xs font-medium capitalize transition-all">
+            {{ status }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Date Range Filter -->
+    <div class="flex flex-wrap items-center gap-2">
+      <label class="text-xs text-accent-500 font-medium uppercase tracking-wider">From</label>
+      <input
+        type="date"
+        [(ngModel)]="dateFrom"
+        (change)="applyDateFilter()"
+        class="px-3 py-1.5 border border-accent-200 rounded-lg text-sm text-accent-700 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400" />
+      <label class="text-xs text-accent-500 font-medium uppercase tracking-wider">To</label>
+      <input
+        type="date"
+        [(ngModel)]="dateTo"
+        (change)="applyDateFilter()"
+        class="px-3 py-1.5 border border-accent-200 rounded-lg text-sm text-accent-700 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400" />
+      @if (hasDateFilter) {
+        <button
+          (click)="clearDateFilter()"
+          class="px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors">
+          Clear
+        </button>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Orders Table -->
+<section class="px-4 py-6 bg-primary-50 min-h-[50vh]">
+  <div class="max-w-7xl mx-auto">
+    @if (filteredOrders.length === 0) {
+      <div class="text-center py-20">
+        <span class="text-6xl mb-4 inline-block">📋</span>
+        <h2 class="text-2xl font-heading text-accent-900 mb-2">No orders yet</h2>
+        <p class="text-accent-500">Orders will appear here as customers place them.</p>
+      </div>
+    } @else {
+      <div class="bg-white rounded-xl shadow-sm border border-accent-100 overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-accent-800 text-white text-xs uppercase tracking-wider">
+                <th class="text-left px-4 py-3.5 font-semibold">Order</th>
+                <th class="text-left px-4 py-3.5 font-semibold">Customer</th>
+                <th class="text-left px-4 py-3.5 font-semibold">Items</th>
+                <th class="text-center px-4 py-3.5 font-semibold">Type</th>
+                <th class="text-center px-4 py-3.5 font-semibold">Status</th>
+                <th class="text-center px-4 py-3.5 font-semibold">Payment</th>
+                <th class="text-right px-4 py-3.5 font-semibold">Total</th>
+                <th class="text-center px-4 py-3.5 font-semibold">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (order of paginatedOrders; track order.id; let i = $index) {
+                <tr
+                  [class]="i % 2 === 0 ? 'bg-white' : 'bg-accent-50/50'"
+                  class="border-t border-accent-100 hover:bg-primary-50 transition-colors group">
+                  <!-- Order # + Time -->
+                  <td class="px-4 py-3.5 align-top">
+                    <span class="font-mono font-bold text-accent-900 text-xs">{{ order.orderNumber }}</span>
+                    <p class="text-[11px] text-accent-400 mt-0.5">{{ order.createdAt | date:'MMM d, h:mm a' }}</p>
+                  </td>
+                  <!-- Customer -->
+                  <td class="px-4 py-3.5 align-top">
+                    <span class="font-medium text-accent-800">{{ order.name }}</span>
+                    <p class="text-[11px] text-accent-400 mt-0.5">{{ order.phone }}</p>
+                  </td>
+                  <!-- Items -->
+                  <td class="px-4 py-3.5 align-top max-w-[220px]">
+                    <div class="flex flex-wrap gap-1">
+                      @for (item of order.items; track item.menuItem.id) {
+                        <span class="inline-flex items-center gap-0.5 bg-accent-50 text-accent-600 text-[11px] px-1.5 py-0.5 rounded border border-accent-100">
+                          {{ item.menuItem.image }} {{ item.menuItem.name }} <span class="text-accent-400">x{{ item.quantity }}</span>
+                        </span>
+                      }
+                    </div>
+                  </td>
+                  <!-- Type -->
+                  <td class="px-4 py-3.5 text-center align-top">
+                    <span class="inline-block px-2.5 py-1 rounded-full text-[11px] font-semibold"
+                          [class]="order.orderType === 'online' ? 'bg-purple-50 text-purple-700 ring-1 ring-purple-200' : 'bg-orange-50 text-orange-700 ring-1 ring-orange-200'">
+                      {{ order.orderType === 'online' ? 'Online' : 'Dine-In' }}
+                    </span>
+                  </td>
+                  <!-- Status -->
+                  <td class="px-4 py-3.5 text-center align-top">
+                    <span [class]="getStatusColor(order.status)"
+                          class="inline-block px-2.5 py-1 rounded-full text-[11px] font-semibold capitalize">
+                      {{ order.status }}
+                    </span>
+                  </td>
+                  <!-- Payment -->
+                  <td class="px-4 py-3.5 text-center align-top">
+                    <span class="inline-flex items-center gap-1 text-xs text-accent-600">
+                      @if (order.paymentMethod === 'card') {
+                        <svg class="w-3.5 h-3.5 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+                        Card
+                      } @else {
+                        <svg class="w-3.5 h-3.5 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                        Cash
+                      }
+                    </span>
+                  </td>
+                  <!-- Total -->
+                  <td class="px-4 py-3.5 text-right align-top">
+                    <span class="font-bold text-accent-900">{{ order.total | currency }}</span>
+                  </td>
+                  <!-- Actions -->
+                  <td class="px-4 py-3.5 text-center align-top">
+                    <div class="flex items-center justify-center gap-1.5">
+                      @if (getNextStatus(order.status); as nextStatus) {
+                        <button
+                          (click)="updateStatus(order.id, nextStatus)"
+                          class="px-3 py-1.5 bg-primary-400 text-white rounded-lg text-xs font-semibold hover:bg-primary-500 transition-colors shadow-sm">
+                          {{ getNextStatusLabel(order.status) }}
+                        </button>
+                      }
+                      @if (order.status === 'pending') {
+                        <button
+                          (click)="updateStatus(order.id, 'cancelled')"
+                          class="px-3 py-1.5 bg-red-50 text-red-600 rounded-lg text-xs font-semibold hover:bg-red-100 transition-colors ring-1 ring-red-100">
+                          Cancel
+                        </button>
+                      }
+                      @if (!getNextStatus(order.status) && order.status !== 'pending') {
+                        <span class="text-[11px] text-accent-300">--</span>
+                      }
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      @if (totalPages > 1) {
+        <div class="flex items-center justify-between mt-5 bg-white rounded-xl border border-accent-100 px-5 py-3">
+          <p class="text-sm text-accent-500">
+            Showing <span class="font-semibold text-accent-700">{{ (currentPage() - 1) * pageSize + 1 }}–{{ currentPage() * pageSize > filteredOrders.length ? filteredOrders.length : currentPage() * pageSize }}</span> of <span class="font-semibold text-accent-700">{{ filteredOrders.length }}</span> orders
+          </p>
+          <div class="flex items-center gap-1">
+            <button
+              (click)="goToPage(currentPage() - 1)"
+              [disabled]="currentPage() === 1"
+              class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors disabled:opacity-30 disabled:cursor-not-allowed bg-accent-50 text-accent-600 hover:bg-accent-100">
+              Prev
+            </button>
+            @for (page of pageNumbers; track page) {
+              <button
+                (click)="goToPage(page)"
+                [class]="currentPage() === page ? 'bg-accent-800 text-white shadow-sm' : 'bg-accent-50 text-accent-600 hover:bg-accent-100'"
+                class="w-9 h-9 rounded-lg text-sm font-semibold transition-all">
+                {{ page }}
+              </button>
+            }
+            <button
+              (click)="goToPage(currentPage() + 1)"
+              [disabled]="currentPage() === totalPages"
+              class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors disabled:opacity-30 disabled:cursor-not-allowed bg-accent-50 text-accent-600 hover:bg-accent-100">
+              Next
+            </button>
+          </div>
+        </div>
+      }
+    }
+  </div>
+</section>

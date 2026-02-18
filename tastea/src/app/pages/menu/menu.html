@@ -1,0 +1,73 @@
+<!-- Page Hero -->
+<section class="bg-gradient-to-br from-primary-200 via-primary-100 to-secondary-100 py-20 pt-28 px-4 text-center">
+  <p class="text-secondary-500 text-sm uppercase tracking-widest mb-2 font-medium">Explore</p>
+  <h1 class="text-4xl md:text-5xl font-heading text-accent-900 mb-4">Our Menu</h1>
+  <p class="text-accent-600 text-lg max-w-2xl mx-auto">
+    From delicate teas to bold coffees and freshly baked pastries — find your perfect treat.
+  </p>
+</section>
+
+<!-- Filters & Menu Grid -->
+<section class="py-12 px-4 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <!-- Category Tabs -->
+    <div class="flex flex-wrap justify-center gap-2 mb-6">
+      @for (cat of categories; track cat.key) {
+        <button
+          (click)="setCategory(cat.key)"
+          class="px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-200"
+          [class]="activeCategory() === cat.key
+            ? 'bg-primary-400 text-white shadow-md'
+            : 'bg-primary-50 text-accent-700 hover:bg-primary-100 border border-primary-200'"
+        >
+          {{ cat.label }}
+        </button>
+      }
+    </div>
+
+    <!-- Subcategory Chips -->
+    @if (subcategories().length > 0) {
+      <div class="flex flex-wrap justify-center gap-2 mb-8">
+        <button
+          (click)="setSubcategory('all')"
+          class="px-4 py-1.5 rounded-full text-sm font-medium transition-all"
+          [class]="activeSubcategory() === 'all'
+            ? 'bg-secondary-500 text-white'
+            : 'bg-secondary-100 text-secondary-700 hover:bg-secondary-200'"
+        >
+          All
+        </button>
+        @for (sub of subcategories(); track sub) {
+          <button
+            (click)="setSubcategory(sub)"
+            class="px-4 py-1.5 rounded-full text-sm font-medium transition-all capitalize"
+            [class]="activeSubcategory() === sub
+              ? 'bg-secondary-500 text-white'
+              : 'bg-secondary-100 text-secondary-700 hover:bg-secondary-200'"
+          >
+            {{ sub }}
+          </button>
+        }
+      </div>
+    }
+
+    <!-- Results Count -->
+    <p class="text-sm text-accent-400 mb-6 text-center">
+      Showing {{ filteredItems().length }} item{{ filteredItems().length !== 1 ? 's' : '' }}
+    </p>
+
+    <!-- Menu Grid -->
+    @if (filteredItems().length > 0) {
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        @for (item of filteredItems(); track item.id) {
+          <app-menu-card [item]="item" (addToCart)="onAddToCart($event)"></app-menu-card>
+        }
+      </div>
+    } @else {
+      <div class="text-center py-16">
+        <span class="text-5xl mb-4 inline-block">🔍</span>
+        <p class="text-accent-500 text-lg">No items match your current filters.</p>
+      </div>
+    }
+  </div>
+</section>

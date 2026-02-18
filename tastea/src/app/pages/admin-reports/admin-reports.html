@@ -1,0 +1,242 @@
+<!-- Admin Header -->
+<section class="bg-accent-800 text-white pt-24 pb-6 px-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-heading mb-1">Order Reports</h1>
+      <p class="text-white/60 text-sm">Revenue and order analytics</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <a routerLink="/admin"
+         class="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-sm font-medium transition-colors">
+        Dashboard
+      </a>
+      <button
+        (click)="logout()"
+        class="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-sm font-medium transition-colors">
+        Sign Out
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Period Tabs + Date Range + Export -->
+<section class="bg-white border-b border-accent-100 px-4 py-4">
+  <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+    <div class="flex flex-wrap items-center gap-4">
+      <!-- Period Tabs -->
+      <div class="flex bg-accent-50 rounded-lg p-1 gap-1">
+        @for (period of ['daily', 'monthly', 'yearly']; track period) {
+          <button
+            (click)="setPeriod($any(period))"
+            [class]="activePeriod() === period ? 'bg-white shadow-sm text-accent-900' : 'text-accent-500 hover:text-accent-700'"
+            class="px-5 py-2 rounded-md text-sm font-medium transition-all capitalize">
+            {{ period }}
+          </button>
+        }
+      </div>
+
+      <!-- Date Range Filter — adapts to period -->
+      <div class="flex items-center gap-2">
+        <label class="text-xs text-accent-500 font-medium uppercase tracking-wider">From</label>
+        @if (activePeriod() === 'daily') {
+          <input
+            type="date"
+            [(ngModel)]="dateFrom"
+            (change)="applyDateFilter()"
+            class="px-3 py-1.5 border border-accent-200 rounded-lg text-sm text-accent-700 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400" />
+        } @else if (activePeriod() === 'monthly') {
+          <input
+            type="month"
+            [(ngModel)]="dateFrom"
+            (change)="applyDateFilter()"
+            class="px-3 py-1.5 border border-accent-200 rounded-lg text-sm text-accent-700 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400" />
+        } @else {
+          <input
+            type="number"
+            [(ngModel)]="yearFrom"
+            (change)="applyDateFilter()"
+            placeholder="e.g. 2025"
+            min="2020"
+            max="2099"
+            class="w-24 px-3 py-1.5 border border-accent-200 rounded-lg text-sm text-accent-700 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400" />
+        }
+        <label class="text-xs text-accent-500 font-medium uppercase tracking-wider">To</label>
+        @if (activePeriod() === 'daily') {
+          <input
+            type="date"
+            [(ngModel)]="dateTo"
+            (change)="applyDateFilter()"
+            class="px-3 py-1.5 border border-accent-200 rounded-lg text-sm text-accent-700 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400" />
+        } @else if (activePeriod() === 'monthly') {
+          <input
+            type="month"
+            [(ngModel)]="dateTo"
+            (change)="applyDateFilter()"
+            class="px-3 py-1.5 border border-accent-200 rounded-lg text-sm text-accent-700 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400" />
+        } @else {
+          <input
+            type="number"
+            [(ngModel)]="yearTo"
+            (change)="applyDateFilter()"
+            placeholder="e.g. 2026"
+            min="2020"
+            max="2099"
+            class="w-24 px-3 py-1.5 border border-accent-200 rounded-lg text-sm text-accent-700 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400" />
+        }
+        @if (hasDateFilter) {
+          <button
+            (click)="clearDateFilter()"
+            class="px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors">
+            Clear
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Export Button -->
+    <button
+      (click)="exportCSV()"
+      [disabled]="rows().length === 0"
+      class="flex items-center gap-2 px-4 py-2 bg-accent-800 text-white rounded-lg text-sm font-medium hover:bg-accent-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V3" />
+      </svg>
+      Export CSV
+    </button>
+  </div>
+</section>
+
+<!-- Summary Cards -->
+<section class="bg-white border-b border-accent-100 px-4 py-4">
+  <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="bg-primary-50 rounded-xl p-4 text-center">
+      <p class="text-2xl font-bold text-accent-900">{{ totals().totalCount }}</p>
+      <p class="text-xs text-accent-500 uppercase tracking-wider">Total Orders</p>
+    </div>
+    <div class="bg-purple-50 rounded-xl p-4 text-center">
+      <p class="text-2xl font-bold text-purple-700">{{ totals().onlineCount }}</p>
+      <p class="text-xs text-accent-500 uppercase tracking-wider">Online Orders</p>
+    </div>
+    <div class="bg-orange-50 rounded-xl p-4 text-center">
+      <p class="text-2xl font-bold text-orange-700">{{ totals().dineInCount }}</p>
+      <p class="text-xs text-accent-500 uppercase tracking-wider">Dine-In Orders</p>
+    </div>
+    <div class="bg-secondary-50 rounded-xl p-4 text-center">
+      <p class="text-2xl font-bold text-secondary-700">{{ totals().totalRevenue | currency }}</p>
+      <p class="text-xs text-accent-500 uppercase tracking-wider">Total Revenue</p>
+    </div>
+  </div>
+</section>
+
+<!-- Report Table -->
+<section class="px-4 py-6 bg-primary-50 min-h-[50vh]">
+  <div class="max-w-7xl mx-auto">
+    @if (rows().length === 0) {
+      <div class="text-center py-20">
+        <span class="text-6xl mb-4 inline-block">📊</span>
+        <h2 class="text-2xl font-heading text-accent-900 mb-2">No report data</h2>
+        <p class="text-accent-500">Orders will appear in reports once placed.</p>
+      </div>
+    } @else {
+      <div class="bg-white rounded-xl shadow-sm border border-accent-100 overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm report-table">
+            <!-- Column group headers -->
+            <thead>
+              <tr class="bg-accent-800 text-white">
+                <th rowspan="2" class="text-left px-5 py-3 font-semibold text-xs uppercase tracking-wider border-r border-accent-700">Period</th>
+                <th colspan="3" class="text-center px-5 py-2 font-semibold text-[11px] uppercase tracking-widest border-r border-accent-700 border-b border-accent-700">
+                  Orders
+                </th>
+                <th colspan="3" class="text-center px-5 py-2 font-semibold text-[11px] uppercase tracking-widest">
+                  Revenue
+                </th>
+              </tr>
+              <tr class="bg-accent-800 text-white/80 text-xs">
+                <th class="text-right px-5 py-2.5 font-medium">
+                  <span class="inline-flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-purple-400"></span> Online
+                  </span>
+                </th>
+                <th class="text-right px-5 py-2.5 font-medium">
+                  <span class="inline-flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-orange-400"></span> Dine-In
+                  </span>
+                </th>
+                <th class="text-right px-5 py-2.5 font-medium border-r border-accent-700">Total</th>
+                <th class="text-right px-5 py-2.5 font-medium">
+                  <span class="inline-flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-purple-400"></span> Online
+                  </span>
+                </th>
+                <th class="text-right px-5 py-2.5 font-medium">
+                  <span class="inline-flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-orange-400"></span> Dine-In
+                  </span>
+                </th>
+                <th class="text-right px-5 py-2.5 font-medium">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (row of paginatedRows; track row.label; let i = $index) {
+                <tr
+                  [class]="i % 2 === 0 ? 'bg-white' : 'bg-accent-50/40'"
+                  class="border-t border-accent-100 hover:bg-primary-50 transition-colors">
+                  <td class="px-5 py-3.5 font-semibold text-accent-900 border-r border-accent-100">{{ row.label }}</td>
+                  <td class="px-5 py-3.5 text-right text-purple-700 tabular-nums">{{ row.onlineCount }}</td>
+                  <td class="px-5 py-3.5 text-right text-orange-700 tabular-nums">{{ row.dineInCount }}</td>
+                  <td class="px-5 py-3.5 text-right font-bold text-accent-900 tabular-nums border-r border-accent-100">{{ row.totalCount }}</td>
+                  <td class="px-5 py-3.5 text-right text-purple-700 tabular-nums">{{ row.onlineRevenue | currency }}</td>
+                  <td class="px-5 py-3.5 text-right text-orange-700 tabular-nums">{{ row.dineInRevenue | currency }}</td>
+                  <td class="px-5 py-3.5 text-right font-bold text-accent-900 tabular-nums">{{ row.totalRevenue | currency }}</td>
+                </tr>
+              }
+            </tbody>
+            <tfoot>
+              <tr class="border-t-2 border-accent-300 bg-accent-800 text-white font-bold">
+                <td class="px-5 py-3.5 border-r border-accent-700">Grand Total</td>
+                <td class="px-5 py-3.5 text-right tabular-nums text-purple-300">{{ totals().onlineCount }}</td>
+                <td class="px-5 py-3.5 text-right tabular-nums text-orange-300">{{ totals().dineInCount }}</td>
+                <td class="px-5 py-3.5 text-right tabular-nums border-r border-accent-700">{{ totals().totalCount }}</td>
+                <td class="px-5 py-3.5 text-right tabular-nums text-purple-300">{{ totals().onlineRevenue | currency }}</td>
+                <td class="px-5 py-3.5 text-right tabular-nums text-orange-300">{{ totals().dineInRevenue | currency }}</td>
+                <td class="px-5 py-3.5 text-right tabular-nums">{{ totals().totalRevenue | currency }}</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      @if (totalPages > 1) {
+        <div class="flex items-center justify-between mt-5 bg-white rounded-xl border border-accent-100 px-5 py-3">
+          <p class="text-sm text-accent-500">
+            Showing <span class="font-semibold text-accent-700">{{ (currentPage() - 1) * pageSize + 1 }}–{{ currentPage() * pageSize > rows().length ? rows().length : currentPage() * pageSize }}</span> of <span class="font-semibold text-accent-700">{{ rows().length }}</span> rows
+          </p>
+          <div class="flex items-center gap-1">
+            <button
+              (click)="goToPage(currentPage() - 1)"
+              [disabled]="currentPage() === 1"
+              class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors disabled:opacity-30 disabled:cursor-not-allowed bg-accent-50 text-accent-600 hover:bg-accent-100">
+              Prev
+            </button>
+            @for (page of pageNumbers; track page) {
+              <button
+                (click)="goToPage(page)"
+                [class]="currentPage() === page ? 'bg-accent-800 text-white shadow-sm' : 'bg-accent-50 text-accent-600 hover:bg-accent-100'"
+                class="w-9 h-9 rounded-lg text-sm font-semibold transition-all">
+                {{ page }}
+              </button>
+            }
+            <button
+              (click)="goToPage(currentPage() + 1)"
+              [disabled]="currentPage() === totalPages"
+              class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors disabled:opacity-30 disabled:cursor-not-allowed bg-accent-50 text-accent-600 hover:bg-accent-100">
+              Next
+            </button>
+          </div>
+        </div>
+      }
+    }
+  </div>
+</section>

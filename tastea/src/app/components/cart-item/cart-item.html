@@ -1,0 +1,43 @@
+<div class="flex items-center gap-4 bg-white rounded-xl p-4 shadow-sm border border-accent-100">
+  <!-- Item Image -->
+  <span class="text-3xl shrink-0">{{ item().menuItem.image }}</span>
+
+  <!-- Item Details -->
+  <div class="flex-1 min-w-0">
+    <h3 class="font-semibold text-accent-900 truncate">{{ item().menuItem.name }}</h3>
+    <p class="text-sm text-accent-500">{{ '$' + item().menuItem.price.toFixed(2) }} each</p>
+  </div>
+
+  <!-- Quantity Controls -->
+  <div class="flex items-center gap-2">
+    <button
+      (click)="decrement()"
+      class="w-8 h-8 rounded-full bg-accent-100 hover:bg-accent-200 text-accent-700 font-bold flex items-center justify-center transition-colors"
+      aria-label="Decrease quantity"
+    >
+      −
+    </button>
+    <span class="w-8 text-center font-semibold text-accent-900">{{ item().quantity }}</span>
+    <button
+      (click)="increment()"
+      class="w-8 h-8 rounded-full bg-primary-100 hover:bg-primary-200 text-primary-700 font-bold flex items-center justify-center transition-colors"
+      aria-label="Increase quantity"
+    >
+      +
+    </button>
+  </div>
+
+  <!-- Line Total -->
+  <div class="text-right shrink-0 w-20">
+    <p class="font-bold text-primary-600">{{ '$' + lineTotal.toFixed(2) }}</p>
+  </div>
+
+  <!-- Remove Button -->
+  <button
+    (click)="onRemove()"
+    class="text-accent-300 hover:text-primary-600 transition-colors p-1"
+    aria-label="Remove item"
+  >
+    ✕
+  </button>
+</div>

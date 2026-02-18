@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Blush Pink (from logo's pink band) */
+  --color-primary-50: #fef7f7;
+  --color-primary-100: #feeeed;
+  --color-primary-200: #fcdad8;
+  --color-primary-300: #f8c0bc;
+  --color-primary-400: #f2a09a;
+  --color-primary-500: #e8807a;
+  --color-primary-600: #d4605a;
+  --color-primary-700: #b24a45;
+  --color-primary-800: #943e3a;
+  --color-primary-900: #7b3634;
+
+  /* Tea Leaf Green (from logo's sprout) */
+  --color-secondary-50: #f8faed;
+  --color-secondary-100: #eff4d6;
+  --color-secondary-200: #dfebb1;
+  --color-secondary-300: #cada82;
+  --color-secondary-400: #b5c85b;
+  --color-secondary-500: #97ab3f;
+  --color-secondary-600: #76882e;
+  --color-secondary-700: #5a6927;
+  --color-secondary-800: #485324;
+  --color-secondary-900: #3e4722;
+
+  /* Charcoal / Dark (from logo's black outline & text) */
+  --color-accent-50: #f6f6f6;
+  --color-accent-100: #e7e7e7;
+  --color-accent-200: #d1d1d1;
+  --color-accent-300: #b0b0b0;
+  --color-accent-400: #888888;
+  --color-accent-500: #6d6d6d;
+  --color-accent-600: #5d5d5d;
+  --color-accent-700: #4f4f4f;
+  --color-accent-800: #3d3d3d;
+  --color-accent-900: #2a2a2a;
+
+  --font-heading: 'Satisfy', cursive;
+  --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-accent: 'Poppins', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
