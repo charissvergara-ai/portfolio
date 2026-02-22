@@ -11,7 +11,7 @@ A modern tea shop web application built with Angular 21 and Tailwind CSS v4. Cus
 | Tailwind CSS | 4 | Utility-first styling via `@tailwindcss/postcss` |
 | Angular Router | 21 | Client-side routing with route guards |
 | RxJS | 7.8 | Reactive event streams (router events) |
-| Jasmine + Karma | Latest | Unit testing |
+| Jest | 30 | Unit testing |
 | Google Fonts | — | Satisfy (headings), Poppins (body) |
 
 ## Getting Started
@@ -64,7 +64,7 @@ Access the admin login at `/admin/login`. Once authenticated, you'll be redirect
 ### Customer-Facing
 
 - **Home page** — Full-screen banner background image behind a semi-transparent gradient overlay, featured items, value propositions, and CTAs
-- **Menu browsing** — 27 curated items across Tea, Coffee, and Pastry categories with subcategory chip filtering
+- **Menu browsing** — 24 curated items across Tea, Coffee, and Pastry categories with subcategory chip filtering
 - **Shopping cart** — Real-time cart badge in header, quantity controls, special instructions, subtotal/tax/total calculations
 - **Checkout** — Customer details form, order type selection (Online Pickup / Dine-In), payment method selection (Card / Cash)
 - **Digital receipt** — Itemized order with store branding, order number, totals, and current order status
@@ -76,6 +76,7 @@ Access the admin login at `/admin/login`. Once authenticated, you'll be redirect
 - **Order dashboard** — Real-time stats cards (total orders, pending, preparing, ready, revenue)
 - **Order filtering** — Filter by type (All / Online / Dine-In) and status (pending, preparing, ready, completed, cancelled)
 - **Order management** — Progress orders through statuses (Pending → Preparing → Ready → Completed) or cancel them
+- **Reports** — Sales analytics with Daily, Monthly, and Yearly breakdowns, showing online vs. dine-in revenue
 - **Header integration** — Admin/Dashboard link in header nav, solid white header background on admin pages
 
 ## Routes
@@ -91,6 +92,7 @@ Access the admin login at `/admin/login`. Once authenticated, you'll be redirect
 | `/receipt/:orderNumber` | Order Receipt | Public |
 | `/admin/login` | Admin Login | Public |
 | `/admin` | Admin Dashboard | Protected (auth guard) |
+| `/admin/reports` | Sales Reports | Protected (auth guard) |
 
 ## Project Structure
 
@@ -129,13 +131,13 @@ src/app/
 
 ## Menu
 
-### Teas (12 varieties)
+### Teas (12 items)
 Green, Black, Herbal, Oolong, White, and Chai — from Classic Matcha Latte to Spiced Chai Latte. Price range: $3.75–$5.75.
 
-### Coffees (6 varieties)
+### Coffees (6 items)
 Hot, Iced, and Blended — from House Blend Pour-Over to Matcha Espresso Fusion. Price range: $4.00–$6.25.
 
-### Pastries (6 varieties)
+### Pastries (6 items)
 Scones, Cakes, Cookies, and Pastries — from Classic Butter Scone to Chocolate Croissant. Price range: $3.25–$6.50.
 
 ## Architecture Highlights
