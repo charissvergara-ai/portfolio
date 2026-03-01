@@ -8,7 +8,7 @@ This repository contains frontend projects created as portfolio pieces.
   - Description: Full-stack hair salon website for Tupi Hair Salon & Beauty Studio. Public pages include Home (hero, featured services, testimonials carousel, category banner, CTA), Services (filterable by category), About, Contact (inquiry form), Booking (2-step appointment form), Receipt, and Testimonials. Admin panel covers Dashboard (stats + quick-access cards), Services CRUD (category filter cards with SVG icons), Appointments (status filter tabs), Inquiries, Payments (status filter tabs, peso totals), Reviews (approve/reject), and Users (create, delete, change password). Backend is a NestJS 11 REST API with MongoDB + Mongoose and JWT authentication. Frontend is Angular 21 with standalone components, Signals, Tailwind CSS v4, and Philippine Peso currency. Admin credentials after seeding: `admin` / `tupi2024`.
   
    - Video Demo - [YouTube](https://youtu.be/p7x6aP1ENRY)
-   - Live Demo - [URL](https://youtu.be/p7x6aP1ENRY)
+   - Live Demo - [URL](https://tupi2026.netlify.app/)
    - Screenshots
   
      - ###### Home
@@ -63,7 +63,7 @@ This repository contains frontend projects created as portfolio pieces.
   - Description: Full-stack dental clinic web application with appointment booking, contact inquiries, and role-based dashboards for doctors and customers. Backend is a GraphQL API (Express + Apollo Server) with PostgreSQL via Prisma 7 and JWT authentication. Frontend is an Angular 21 SPA with standalone components, Signals, reactive forms, and SCSS. Includes 88 unit tests across backend and frontend using Vitest.
 
    - Video Demo: [YouTube](https://youtu.be/69XHbjm6Yr0)
-   - Live Demo - [URL](https://youtu.be/p7x6aP1ENRY)
+   - Live Demo - [URL](https://dentafy.netlify.app/)
    - Screenshots
 
      - ###### Home
@@ -105,7 +105,6 @@ This repository contains frontend projects created as portfolio pieces.
   - Description: Tea shop web application where customers can browse 24 menu items across Tea, Coffee, and Pastry categories, add items to a cart, checkout with Online Pickup or Dine-In options, and receive a digital receipt. Includes a protected admin dashboard for managing order statuses and a sales reports page with Daily, Monthly, and Yearly breakdowns. Built with Angular 21, TypeScript, Tailwind CSS v4, and Angular Signals.
 
   - Video Demo: [YouTube](https://youtu.be/4f9XHiINqmI)
-  - Live Demo - [URL](https://youtu.be/p7x6aP1ENRY)
   - Screenshots
 
      - ###### Home
@@ -159,7 +158,6 @@ This repository contains frontend projects created as portfolio pieces.
   - Description: Charity website for Helping Hands, Inc. — a 501(c)(3) nonprofit providing free cleft lip and palate surgery for children in the Philippines. Features 9 pages including sponsorships, medical missions, filterable family gallery, team profiles, and contact form. Built with Angular 21, TypeScript, SCSS, Angular Signals, and standalone components.
   
   - Video Demo: [YouTube](https://youtu.be/VyG3eNxLvXY)
-  - Live Demo - [URL](https://youtu.be/p7x6aP1ENRY)
   - Screenshots
 
      - ###### Home
@@ -198,7 +196,6 @@ This repository contains frontend projects created as portfolio pieces.
   - Video Demo - Vendor Page: [Link](https://youtu.be/BMNakytP97Y)
   - Video Demo - Admin Page: [Link](https://youtu.be/snubukxxV7o)
   - Video Demo - Customer Page: [Link](https://youtu.be/ykPjUVHUKE0)
-  - Live Demo - [URL](https://youtu.be/p7x6aP1ENRY)
   - Screenshots
   
      - ###### Home
@@ -266,7 +263,6 @@ This repository contains frontend projects created as portfolio pieces.
   - Description: Admin dashboard layout with charts and orders.
   
   - Video Demo: [YouTube](https://youtu.be/fL-ebBTUIF8)
-  - Live Demo - [URL](https://youtu.be/p7x6aP1ENRY)
   - Screenshots
   
      - ###### Dashboard Page
@@ -301,7 +297,6 @@ This repository contains frontend projects created as portfolio pieces.
   - Description: Small e-commerce style shop for flowers.
   
   - Video Demo: [YouTube](https://youtu.be/OcnUiuv75rM)
-  - Live Demo - [URL](https://youtu.be/p7x6aP1ENRY)
   - Screenshots
   
      - ###### Home Page
@@ -326,7 +321,6 @@ This repository contains frontend projects created as portfolio pieces.
   - Description: Personal portfolio website.
   
   - Video Demo: [YouTube](https://youtu.be/d2TI6pn48Ng)
-  - Live Demo - [URL](https://youtu.be/p7x6aP1ENRY)
   - Screenshot
       <img src="./personal-website/screenshot1.png" width="600">
   ---
