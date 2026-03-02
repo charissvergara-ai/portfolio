@@ -186,6 +186,26 @@ This repository contains frontend projects created as portfolio pieces.
 
      - ###### Contact Us
         <img src="./helping-hands/screenshot9.png" width="600">
+   ---
+
+- **clockmein** — path: `clockmein`
+  - Description: Employee Daily Time Record (EDTR) System — a role-based time tracking web application. Employees can clock in/out with a live timer, view personal records in a date-browsable EDTR table, filter by date range and status, export records as CSV, and print as PDF. Administrators get a dashboard with live stats, full access to all employee records, ability to edit/delete entries, CSV export, and employee account management (add, edit, delete). Demo data spanning the past 28 working days is seeded automatically on first load; clearing localStorage resets and re-seeds. Built with Angular 21, standalone components, Angular Signals, Angular Router with lazy-loaded routes and functional guards, and SCSS with CSS custom properties. All data persisted in localStorage — no backend required. 
+  
+   - Video Demo: [Link](https://youtu.be/nnS3pVGTkvo)
+   - Screenshots
+  
+      - ###### Login
+         <img src="./clockmein/screenshot1.png" width="600">
+
+      - ###### Admin Dashboard
+         <img src="./clockmein/screenshot2.png" width="600">
+
+      - ###### Admin Manage Employees
+         <img src="./clockmein/screenshot3.png" width="600">
+
+      - ###### Employee Dashboard
+         <img src="./clockmein/screenshot4.png" width="600">
+
 ---
 ## Next.js Projects
 
