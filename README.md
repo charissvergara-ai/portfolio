@@ -206,7 +206,33 @@ This repository contains frontend projects created as portfolio pieces.
       - ###### Employee Dashboard
          <img src="./clockmein/screenshot4.png" width="600">
 
+   ---
+
+- **taskmanager** — path: `taskmanager`
+  - Description: A modern, production-quality Angular 20 application demonstrating best practices in **Angular Signals**, **WCAG AA/AAA accessibility**, **responsive design**, **RESTful API integration**, and **scalable component architecture**.
+  
+   - Video Demo: [Link](https://youtu.be/OkmSAQrQCUg)
+   - Screenshots
+  
+      - ###### Dashboard
+         <img src="./taskmanager/screenshot1.png" width="600">
+
+      - ###### Users
+         <img src="./taskmanager/screenshot2.png" width="600">
+
+      - ###### Tasks
+         <img src="./taskmanager/screenshot3.png" width="600">
+
+      - ###### Posts
+         <img src="./taskmanager/screenshot4.png" width="600">
+
+      - ###### Theme - Dark
+         <img src="./taskmanager/screenshot1.png" width="600">
+
+      - ###### Theme - Light
+         <img src="./taskmanager/screenshot5.png" width="600">
 ---
+
 ## Next.js Projects
 
 - **kaguro** — path: `kaguro`
