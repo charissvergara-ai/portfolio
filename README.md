@@ -99,6 +99,45 @@ This repository contains frontend projects created as portfolio pieces.
      - ###### Book Appointment
         <img src="./dentafy/screenshot10.png" width="600">
 ---
+- **campdashboard** — path: `campdashboard`
+  - Description: Full-stack campground management dashboard (CampDash) for monitoring and managing a campground at a glance. Overview page displays KPI stat cards (occupancy rate, total revenue, avg nightly rate, active reservations, check-ins/check-outs today, current vacancy rate, avg guest rating), an occupancy rate line chart, a revenue by month bar chart, and a recent reservations table. Additional pages include Reservations (status filter tabs: All, Confirmed, Checked In, Checked Out, Cancelled; date range and site type filters), Revenue (monthly and year-over-year line/bar charts, booking sources donut chart, revenue by site type horizontal bar chart), Sites (visual site grid with color-coded availability/occupied/reserved/maintenance status and revenue by site type chart), Guests (table with visit count, last visit date, total spent, and guest type), and Reviews (overall 4.1/5 star rating with filter tabs and individual guest review cards). Settings panel includes Appearance (6 color themes: Light, Dark, Lavender, Sunset, Ocean, System), Profile, Campground, and Notifications. Frontend is React 19 with React Router 7, Vite 8, Tailwind CSS 4, Recharts 3, and Lucide React. Backend is an Express 5 REST API with Node.js and PostgreSQL 16 (Docker). Includes Playwright E2E tests, Vitest unit tests, Supertest API integration tests, and Storybook 8 component documentation.
+
+  - Video Demo: [Link](https://youtu.be/WtkcQ8a_oto)
+  - Screenshots
+
+     - ###### Overview
+        <img src="./campdashboard/screenshot1.png" width="600">
+
+     - ###### Reservations
+        <img src="./campdashboard/screenshot2.png" width="600">
+
+     - ###### Revenue
+        <img src="./campdashboard/screenshot3.png" width="600">
+
+     - ###### Sites
+        <img src="./campdashboard/screenshot4.png" width="600">
+
+     - ###### Guests
+        <img src="./campdashboard/screenshot5.png" width="600">
+
+     - ###### Reviews
+        <img src="./campdashboard/screenshot6.png" width="600">
+
+     - ###### Settings - Appearance
+        <img src="./campdashboard/screenshot7.png" width="600">
+
+     - ###### Theme - Dark
+        <img src="./campdashboard/screenshot8.png" width="600">
+
+     - ###### Theme - Lavender
+        <img src="./campdashboard/screenshot9.png" width="600">
+
+     - ###### Theme - Sunset
+        <img src="./campdashboard/screenshot10.png" width="600">
+
+     - ###### Theme - Ocean
+        <img src="./campdashboard/screenshot11.png" width="600">
+---
 ## Angular Projects
 
 - **tastea** — path: `tastea`
